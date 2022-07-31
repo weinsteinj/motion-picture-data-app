@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MotionPictureDataApp.DAO;
 using MotionPictureDataApp.MovieDAO;
+using MotionPictureDataApp.Models;
 
 namespace MotionPictureDataApp.Controllers
 {
@@ -22,11 +23,12 @@ namespace MotionPictureDataApp.Controllers
         }
 
 
-        //[HttpPost]
-        //public 
+        [HttpPost]
+        public Movie PostNewMovie(NewMovieDTO newMovieDTO) 
+        {
 
-        //{
-        //}
+            return movieDao.AddMovie(newMovieDTO);
+        }
 
         [HttpGet]
         public IList<Movie> AllMovies()
@@ -36,15 +38,23 @@ namespace MotionPictureDataApp.Controllers
         }
 
 
+        [HttpGet("{id}")]
+        public Movie GetMovieById(int id)
+        {
+            return movieDao.GetMovieById(id);
+
+        }
+
+
         //[HttpPut]
         //public 
         //{}
 
-        //[HttpDelete]
-        //public void 
-        //{
-
-        //}
+        [HttpDelete("/{id}")]
+        public void DeleteMovieById (int id)
+        {
+            movieDao.DeleteMovie(id);
+        }
 
 
 

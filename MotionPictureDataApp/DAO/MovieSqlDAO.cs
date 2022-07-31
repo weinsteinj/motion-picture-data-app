@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MotionPictureDataApp.MovieDAO;
 using System.Data.SqlClient;
-
+using MotionPictureDataApp.Models;
 
 namespace MotionPictureDataApp.DAO
 
@@ -28,10 +28,8 @@ namespace MotionPictureDataApp.DAO
 
                 {
                     sqlConnect.Open();
-
                     SqlCommand query = new SqlCommand(
                         "SELECT * FROM movies;", sqlConnect);
-
                     SqlDataReader sqlReader = query.ExecuteReader();
 
                     while (sqlReader.Read())
@@ -51,9 +49,44 @@ namespace MotionPictureDataApp.DAO
             return allMovies;
             }
 
-            public Movie AddMovie(string name, int releaseYear, string description)
+            public Movie GetMovieById(int id) 
             {
-            Movie movie = new Movie(name, releaseYear, description);
+            Movie movie = new Movie();
+
+            try
+            {
+                using (SqlConnection sqlConnect = new SqlConnection(connectionString))
+
+                {
+                    sqlConnect.Open();
+                    SqlCommand query = new SqlCommand(
+                        "SELECT * FROM movies WHERE Id = @Id", sqlConnect);
+                    query.Parameters.AddWithValue("@Id", id);
+                    SqlDataReader sqlReader = query.ExecuteReader();
+
+                    if (sqlReader.Read())
+                    {
+                        movie = MapMovieFromReader(sqlReader);
+                    
+                    }
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+
+            return movie;
+            }
+
+            public Movie AddMovie(NewMovieDTO newMovieDTO)
+            {
+            Movie movie = new Movie();
+
+            movie.Name = newMovieDTO.Name;
+            movie.Description = newMovieDTO.Description;
+            movie.ReleaseYear = newMovieDTO.ReleaseYear;
+            
             return movie;
             }
 
@@ -65,7 +98,24 @@ namespace MotionPictureDataApp.DAO
 
             public void DeleteMovie(int id)
             {
-            //delete the movie at DB
+            try
+            {
+                using (SqlConnection sqlConnect = new SqlConnection(connectionString))
+
+                {
+                    sqlConnect.Open();
+                    SqlCommand query = new SqlCommand(
+                       "DELETE FROM movies WHERE Id = @Id", sqlConnect);
+                    query.Parameters.AddWithValue("@Id", id);
+                }
+
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+
+          
             }
 
             private Movie MapMovieFromReader (SqlDataReader sqlReader)
