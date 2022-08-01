@@ -1,1 +1,1 @@
-SELECT * FROM movies;
+SELECT * FROM MotionPictures;

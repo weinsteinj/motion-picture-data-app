@@ -1,8 +1,8 @@
 --drop db, table if exists (@idempotent), then create table with data columns and constraints as needed 
 
-DROP TABLE IF EXISTS movies; 
+DROP TABLE IF EXISTS MotionPictures; 
 
-CREATE TABLE movies (
+CREATE TABLE MotionPictures (
 	Id int IDENTITY(1,1) PRIMARY KEY,
 	Name NVARCHAR(50) NOT NULL,
 	Description NVARCHAR(500),

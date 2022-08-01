@@ -29,7 +29,7 @@ namespace MotionPictureDataApp.DAO
                 {
                     sqlConnect.Open();
                     SqlCommand query = new SqlCommand(
-                        "SELECT * FROM movies;", sqlConnect);
+                        "SELECT * FROM MotionPictures;", sqlConnect);
                     SqlDataReader sqlReader = query.ExecuteReader();
 
                     while (sqlReader.Read())
@@ -60,7 +60,7 @@ namespace MotionPictureDataApp.DAO
                 {
                     sqlConnect.Open();
                     SqlCommand query = new SqlCommand(
-                        "SELECT * FROM movies WHERE Id = @Id", sqlConnect);
+                        "SELECT * FROM MotionPictures WHERE Id = @Id", sqlConnect);
                     query.Parameters.AddWithValue("@Id", id);
                     SqlDataReader sqlReader = query.ExecuteReader();
 
@@ -93,7 +93,7 @@ namespace MotionPictureDataApp.DAO
                 {
                     sqlConnect.Open();
                     SqlCommand command = new SqlCommand(
-                        "INSERT INTO movies ( Name, Description, ReleaseYear) VALUES(@Name, @Description, @ReleaseYear);", sqlConnect);
+                        "INSERT INTO MotionPictures ( Name, Description, ReleaseYear) VALUES(@Name, @Description, @ReleaseYear);", sqlConnect);
                     command.Parameters.AddWithValue("@Name", movie.Name);
                     command.Parameters.AddWithValue("@Description", movie.Description);
                     command.Parameters.AddWithValue("@ReleaseYear", movie.ReleaseYear);
@@ -125,7 +125,7 @@ namespace MotionPictureDataApp.DAO
                     {
                         sqlConnect.Open();
                         SqlCommand nonQuery = new SqlCommand(
-                           "UPDATE movies SET Name = @Name, Description = @Description, ReleaseYear = @ReleaseYear WHERE Id = @Id", sqlConnect);
+                           "UPDATE MotionPictures SET Name = @Name, Description = @Description, ReleaseYear = @ReleaseYear WHERE Id = @Id", sqlConnect);
                         nonQuery.Parameters.AddWithValue("@Id", id);
                         nonQuery.Parameters.AddWithValue("@Name", updatedMovie.Name);
                         nonQuery.Parameters.AddWithValue("@Description", updatedMovie.Description);
@@ -155,7 +155,7 @@ namespace MotionPictureDataApp.DAO
                 {
                     sqlConnect.Open();
                     SqlCommand nonQuery = new SqlCommand(
-                       "DELETE FROM movies WHERE Id = @Id", sqlConnect);
+                       "DELETE FROM MotionPictures WHERE Id = @Id", sqlConnect);
                     nonQuery.Parameters.AddWithValue("@Id", id);
                     nonQuery.ExecuteNonQuery();
                 }
