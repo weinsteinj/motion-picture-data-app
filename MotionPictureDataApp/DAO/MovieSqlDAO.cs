@@ -143,10 +143,6 @@ namespace MotionPictureDataApp.DAO
             }
 
 
-
-
-
-
             return updatedMovie;
             }
 

@@ -46,10 +46,12 @@ namespace MotionPictureDataApp.Controllers
 
         }
 
-
-        //[HttpPut]
-        //public 
-        //{}
+        [EnableCors]
+        [HttpPut("{id}")]
+        public Movie UpdateMovie(NewMovieDTO newMovieDTO, int id) 
+        {
+            return movieDao.UpdateMovie(newMovieDTO, id);
+        }
 
         [EnableCors]
         [HttpDelete("{id}")]
