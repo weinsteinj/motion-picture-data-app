@@ -13,8 +13,13 @@ VALUES ('Space Skirmish Part 1', 'Saturn Spins', 1986);
 INSERT INTO movies (Name, Description, ReleaseYear) 
 VALUES ('Space Skirmish Part 2', 'Adventures in the Khyber Belt', 1999);
 INSERT INTO movies (Name, Description, ReleaseYear) 
-VALUES ('Space Skirmish Part 3', 'Black Holes and Beyond', 1999);
+VALUES ('Space Skirmish Part 3', 'Black Holes and Beyond', 2005);
 INSERT INTO movies (Name, Description, ReleaseYear) 
-VALUES ('Space Skirmish Part 4', 'Jupiter on Fire', 1999);
+VALUES ('Space Skirmish Part 4', 'Jupiter on Fire', 2018);
 
 SELECT * FROM movies;
+
+INSERT INTO movies ( Name, Description, ReleaseYear) 
+VALUES ('Space Balls', 'Judy-Jan', 2000);
+
+DELETE FROM movies WHERE Id = 1;

@@ -86,13 +86,67 @@ namespace MotionPictureDataApp.DAO
             movie.Name = newMovieDTO.Name;
             movie.Description = newMovieDTO.Description;
             movie.ReleaseYear = newMovieDTO.ReleaseYear;
-            
+
+            try
+            {
+                using (SqlConnection sqlConnect = new SqlConnection(connectionString))
+                {
+                    sqlConnect.Open();
+                    SqlCommand command = new SqlCommand(
+                        "INSERT INTO movies ( Name, Description, ReleaseYear) VALUES(@Name, @Description, @ReleaseYear);", sqlConnect);
+                    command.Parameters.AddWithValue("@Name", movie.Name);
+                    command.Parameters.AddWithValue("@Description", movie.Description);
+                    command.Parameters.AddWithValue("@ReleaseYear", movie.ReleaseYear);
+                    movie.Id = Convert.ToInt32(command.ExecuteScalar());
+                }
+            }
+            // capture POST new ID and add to rest of request to return the whole Object response body and return that instead (includes --orr JUST query for newly created id...
+
+            catch (SqlException)
+            {
+                throw;
+            }
+
             return movie;
             }
 
-            public Movie UpdateMovie()
+            public Movie UpdateMovie(NewMovieDTO newMovieDTO, int id)
             {
-            Movie updatedMovie = null;
+            Movie updatedMovie = new Movie ();
+
+            updatedMovie.Name = newMovieDTO.Name;
+            updatedMovie.Description = newMovieDTO.Description;
+            updatedMovie.ReleaseYear = newMovieDTO.ReleaseYear;
+            {
+                try
+                {
+                    using (SqlConnection sqlConnect = new SqlConnection(connectionString))
+
+                    {
+                        sqlConnect.Open();
+                        SqlCommand nonQuery = new SqlCommand(
+                           "UPDATE movies SET Name = @Name, Description = @Description, ReleaseYear = @ReleaseYear WHERE Id = @Id", sqlConnect);
+                        nonQuery.Parameters.AddWithValue("@Id", id);
+                        nonQuery.Parameters.AddWithValue("@Name", updatedMovie.Name);
+                        nonQuery.Parameters.AddWithValue("@Description", updatedMovie.Description);
+                        nonQuery.Parameters.AddWithValue("@ReleaseYear", updatedMovie.ReleaseYear);
+                        nonQuery.ExecuteNonQuery();
+                    }
+
+                }
+                catch (SqlException)
+                {
+                    throw;
+                }
+
+
+            }
+
+
+
+
+
+
             return updatedMovie;
             }
 
@@ -104,19 +158,20 @@ namespace MotionPictureDataApp.DAO
 
                 {
                     sqlConnect.Open();
-                    SqlCommand query = new SqlCommand(
+                    SqlCommand nonQuery = new SqlCommand(
                        "DELETE FROM movies WHERE Id = @Id", sqlConnect);
-                    query.Parameters.AddWithValue("@Id", id);
+                    nonQuery.Parameters.AddWithValue("@Id", id);
+                    nonQuery.ExecuteNonQuery();
                 }
 
             }
             catch (SqlException)
             {
                 throw;
-            }
+           }
 
-          
-            }
+    
+       }
 
             private Movie MapMovieFromReader (SqlDataReader sqlReader)
         {

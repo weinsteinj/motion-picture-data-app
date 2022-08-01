@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using MotionPictureDataApp.DAO;
 using MotionPictureDataApp.MovieDAO;
 using MotionPictureDataApp.Models;
+using Microsoft.AspNetCore.Cors;
 
 namespace MotionPictureDataApp.Controllers
 {
@@ -22,7 +23,7 @@ namespace MotionPictureDataApp.Controllers
             this.movieDao = movieDAO;
         }
 
-
+        [EnableCors]
         [HttpPost]
         public Movie PostNewMovie(NewMovieDTO newMovieDTO) 
         {
@@ -50,7 +51,8 @@ namespace MotionPictureDataApp.Controllers
         //public 
         //{}
 
-        [HttpDelete("/{id}")]
+        [EnableCors]
+        [HttpDelete("{id}")]
         public void DeleteMovieById (int id)
         {
             movieDao.DeleteMovie(id);
