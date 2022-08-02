@@ -1,14 +1,18 @@
 <template>
-  <div class="">
-    <h1>{{ msg }}</h1>
+  <div>
+    <h1></h1>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'add-movie',
+  data () {
+    return {
+      headerText: 'Please Add to Movie-Vue!'
+    }
+  },
   props: {
-    msg: String
   }
 }
 </script>

@@ -13,6 +13,7 @@ namespace MotionPictureDataApp.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [EnableCors("MyPolicy")]
     public class MovieController : ControllerBase
     {
         private readonly IMovieDAO movieDao;
@@ -23,7 +24,7 @@ namespace MotionPictureDataApp.Controllers
             this.movieDao = movieDAO;
         }
 
-        [EnableCors]
+        [EnableCors("MyPolicy")]
         [HttpPost]
         public Movie PostNewMovie(NewMovieDTO newMovieDTO) 
         {
@@ -31,6 +32,7 @@ namespace MotionPictureDataApp.Controllers
             return movieDao.AddMovie(newMovieDTO);
         }
 
+        [EnableCors("MyPolicy")]
         [HttpGet]
         public IList<Movie> AllMovies()
         {
@@ -38,7 +40,7 @@ namespace MotionPictureDataApp.Controllers
 
         }
 
-
+        [EnableCors("MyPolicy")]
         [HttpGet("{id}")]
         public Movie GetMovieById(int id)
         {
@@ -46,14 +48,14 @@ namespace MotionPictureDataApp.Controllers
 
         }
 
-        [EnableCors]
+        [EnableCors("MyPolicy")]
         [HttpPut("{id}")]
         public Movie UpdateMovie(NewMovieDTO newMovieDTO, int id) 
         {
             return movieDao.UpdateMovie(newMovieDTO, id);
         }
 
-        [EnableCors]
+        [EnableCors("MyPolicy")]
         [HttpDelete("{id}")]
         public void DeleteMovieById (int id)
         {

@@ -1,13 +1,6 @@
 <template>
   <div class="home">
     <motion-pictures>
-      <table>
-        <thead></thead>
-        <thead></thead>
-        <thead></thead>
-        <thead></thead>
-        <tr v-for="movie in movies" v-bind:key="movie.id"></tr>
-      </table>
     </motion-pictures>
   </div>
 </template>
