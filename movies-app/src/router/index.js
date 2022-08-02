@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Add from '../views/Add.vue'
 import TestView from '../views/TestView.vue'
+import Table from '@/views/Table.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/test',
     name: 'TestView',
     component: TestView
+  },
+  {
+    path: '/table',
+    name: 'Table',
+    component: Table
   }
 ]
 

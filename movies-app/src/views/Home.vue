@@ -1,13 +1,12 @@
 <template>
   <div class="home">
-    <motion-pictures>
-    </motion-pictures>
+    <movie-table></movie-table>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import MotionPictures from '@/components/MotionPictures.vue'
+import MovieTable from '@/components/MovieTable.vue'
 
 export default {
   name: 'Home',
@@ -21,7 +20,7 @@ export default {
     }
   },
   components: {
-    MotionPictures
+    MovieTable
   }
 }
 </script>

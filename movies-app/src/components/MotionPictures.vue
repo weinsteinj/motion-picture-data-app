@@ -27,7 +27,7 @@ export default {
   },
   data () {
     return {
-      headerText: 'Welcome Movie-Vue!',
+      headerText: 'Welcome to Movie-Vue!',
       titleColHead: 'Title',
       descriptionColHead: 'Description',
       yearColHead: 'Release Year',

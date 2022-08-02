@@ -1,5 +1,7 @@
 <template>
-<div></div>
+<div>
+  <movie-table></movie-table>
+</div>
 </template>
 
 <script>

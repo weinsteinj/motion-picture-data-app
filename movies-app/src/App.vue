@@ -4,6 +4,7 @@
       <router-link to="/">Motion Picture Data Manager</router-link> |
       <router-link to="/add">Add</router-link> |
       <router-link to="/test">Test Here!</router-link>
+      <router-link to="/table">Data Table!</router-link>
     </div>
     <router-view/>
   </div>
