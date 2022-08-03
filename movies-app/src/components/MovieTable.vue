@@ -1,7 +1,8 @@
 <template>
   <body>
-        <h1>{{headerText}}</h1>
-    <table>
+    <h1>{{headerText}}</h1>
+    <div id="table-div">
+     <table>
       <tr>
         <th>{{titleColHead}}</th>
         <th>{{descriptionColHead}}</th>
@@ -14,7 +15,8 @@
         <td>{{m.releaseYear}}</td>
         <td></td>
       </tr>
-    </table>
+     </table>
+    </div>
   </body>
 </template>
 
@@ -44,7 +46,8 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
+
 h1 {
    text-align: center;
 }
@@ -53,4 +56,24 @@ table {
     margin-left: auto;
     margin-right: auto;
 }
+
+tr {
+    min-height: 50px;
+}
+#table-div {
+    display: flex;
+    flex-grow: 1;
+    
+}
+
+/* td {
+    margin-left: 10 px;
+    margin-right: 10px;
+}
+thead {
+    font-size: 50pt;
+    min-width: 20%;
+    margin-left: 50px;
+    margin-right: 50px;
+} */
 </style>

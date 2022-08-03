@@ -10,22 +10,22 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'home',
     component: Home
   },
   {
     path: '/add',
-    name: 'Add',
+    name: 'add',
     component: Add
   },
   {
     path: '/test',
-    name: 'TestView',
+    name: 'test-view',
     component: TestView
   },
   {
     path: '/table',
-    name: 'Table',
+    name: 'table',
     component: Table
   }
 ]
