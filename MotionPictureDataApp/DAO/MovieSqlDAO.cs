@@ -110,13 +110,14 @@ namespace MotionPictureDataApp.DAO
             return movie;
             }
 
-            public Movie UpdateMovie(NewMovieDTO newMovieDTO, int id)
+            public Movie UpdateMovie(UpdateMovieDTO updateMovieDTO)
             {
             Movie updatedMovie = new Movie ();
 
-            updatedMovie.Name = newMovieDTO.Name;
-            updatedMovie.Description = newMovieDTO.Description;
-            updatedMovie.ReleaseYear = newMovieDTO.ReleaseYear;
+            updatedMovie.Id = updateMovieDTO.Id;
+            updatedMovie.Name = updateMovieDTO.Name;
+            updatedMovie.Description = updateMovieDTO.Description;
+            updatedMovie.ReleaseYear = updateMovieDTO.ReleaseYear;
             {
                 try
                 {
@@ -126,7 +127,7 @@ namespace MotionPictureDataApp.DAO
                         sqlConnect.Open();
                         SqlCommand nonQuery = new SqlCommand(
                            "UPDATE MotionPictures SET Name = @Name, Description = @Description, ReleaseYear = @ReleaseYear WHERE Id = @Id", sqlConnect);
-                        nonQuery.Parameters.AddWithValue("@Id", id);
+                        nonQuery.Parameters.AddWithValue("@Id", updatedMovie.Id);
                         nonQuery.Parameters.AddWithValue("@Name", updatedMovie.Name);
                         nonQuery.Parameters.AddWithValue("@Description", updatedMovie.Description);
                         nonQuery.Parameters.AddWithValue("@ReleaseYear", updatedMovie.ReleaseYear);

@@ -1,19 +1,18 @@
 <template>
   <div>
     <h1>{{headerText}}</h1>
-    <form v-on:submit.prevent="postMovie">
+    <form v-on:submit.prevent="updateMovie">
       <label for="name">Name:</label><br>
-      <input type="text" placeholder="Name" v-model="newMovie.name" maxlength="50" minlength="1" 
-      id="title-input" required>
-      <br>
+      <input type="text" placeholder="Name" v-model="updatedMovie.name" 
+      value="Old Title" required maxlength="50" minlength="1">
       <br>
       <label for="description">Description:</label><br>
       <textarea rows="10" cols="100" id="description-text" placeholder="Description" 
-      v-model="newMovie.description" maxlength="500"></textarea>
+      v-model="updatedMovie.description" maxlength="500"></textarea>
       <br>
       <br>
       <label for="releaseYear" >Release Year:</label><br>
-      <input type="text" placeholder="Release Year" v-model="newMovie.releaseYear" 
+      <input type="text" placeholder="Release Year" v-model="updatedMovie.releaseYear" 
       required minlength="4" maxlength="4">
       <br>
       <br>
@@ -26,23 +25,27 @@
 import axios from 'axios'
 
 export default {
-  name: 'add-movie',
+  name: 'edit-movie',
   data () {
     return {
-      headerText: 'Please Add to Movie-Vue!',
-      newMovie: {
-        name: '',
-        description: '',
-        releaseYear: null,
+      headerText: 'Please Edit the Movie Data Below',
+      updatedMovie: {
+        id: this.$route.params.id,
+        name: this.$route.params.name,
+        description: this.$route.params.description,
+        releaseYear: this.$route.params.releaseYear,
+      },
+      movieArray: {
+
       },
     }
   },
   methods: {
-    postMovie () {
-      // create body of post request, including parsing the year to an integer
-      const movieBody = {name: this.newMovie.name, description: this.newMovie.description, releaseYear: Number.parseInt(this.newMovie.releaseYear)};
-      // send the axios Http-POST request to back-end server
-      axios.post('https://localhost:5001/movie/', movieBody)
+    updateMovie () {
+      // create body of PUT request, including parsing the year ((AND id)) to an integer
+      const movieBody = {id: this.updatedMovie.id, name: this.updatedMovie.name, description: this.updatedMovie.description, releaseYear: Number.parseInt(this.updatedMovie.releaseYear)};
+      // send the axios Http-PUT request to back-end server
+      axios.put(`https://localhost:5001/movie/${this.$route.params.id}`, movieBody)
        .then(response => console.log(response.data));
       // send the axios Http-GET-All request to back-end server to refresh the table view after posting
       axios.get('https://localhost:5001/movie/')
@@ -53,7 +56,7 @@ export default {
        this.$router.push({name:'home'});
     },
     resetMovieForm () {
-      this.newMovie = {};
+      this.updatedMovie = {};
     },
   },
   props: {
@@ -76,8 +79,5 @@ li {
 }
 a {
   color: #42b983;
-}
-#title-input {
-  width: 30%
 }
 </style>

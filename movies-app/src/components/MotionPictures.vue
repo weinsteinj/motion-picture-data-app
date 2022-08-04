@@ -3,7 +3,7 @@
     <h1>{{ headerText }}</h1>
     <v-table :data="movies">
       <thead slot="head">
-          <th>{{titleColHead}}</th>
+          <th>{{nameColHead}}</th>
           <th>{{descriptionColHead}}</th>
           <th>{{yearColHead}}</th>
           <th>{{actionsColHead}}</th>
@@ -28,13 +28,13 @@ export default {
   data () {
     return {
       headerText: 'Welcome to Movie-Vue!',
-      titleColHead: 'Title',
+      nameColHead: 'Name',
       descriptionColHead: 'Description',
       yearColHead: 'Release Year',
       actionsColHead: 'Actions',
       oneMovie: {
         id: 100,
-        title: '',
+        name: '',
         description: '',
         releaseYear: ''
       }
@@ -62,7 +62,7 @@ thead {
 table {
   /* display: grid;
   grid-template-columns: 1fr 3fr 1fr 1fr;
-  grid-template-areas: "title-head description-head year-head actions-head"
+  grid-template-areas: "name-head description-head year-head actions-head"
                         "";
   width: 80%; */
 }

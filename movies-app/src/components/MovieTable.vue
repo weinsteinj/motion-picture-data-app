@@ -4,7 +4,7 @@
     <div id="table-div">
      <table>
       <tr>
-        <th>{{titleColHead}}</th>
+        <th>{{nameColHead}}</th>
         <th>{{descriptionColHead}}</th>
         <th>{{yearColHead}}</th>
         <th>{{actionsColHead}}</th>
@@ -13,7 +13,14 @@
         <td>{{m.name}}</td>
         <td>{{m.description}}</td>
         <td>{{m.releaseYear}}</td>
-        <td></td>
+        <td>
+          <router-link v-bind:to="{name: 'edit', params: {id: m.id, name: m.name, description: m.description, releaseYear: m.releaseYear}}">
+            <button v-on:click="loadEditForm">Edit</button>
+          </router-link>
+            
+          <button>Copy</button>
+          <button>Delete</button>
+        </td>
       </tr>
      </table>
     </div>
@@ -30,7 +37,7 @@ export default {
       movie: null,
       movieArray: [],
       headerText: 'Welcome to Movie-Vue!',
-      titleColHead: 'Title',
+      nameColHead: 'Name',
       descriptionColHead: 'Description',
       yearColHead: 'Release Year',
       actionsColHead: 'Actions',
@@ -41,6 +48,14 @@ export default {
       .then(response => (this.movie = response.data))
     axios.get('https://localhost:5001/movie/')
       .then(response => (this.movieArray = response.data))
+  },
+
+  methods: {
+    loadEditForm () {
+     // this.$router.push({name: "edit"}, params:})
+        // to do --> load edit view
+
+     },
   }
 }
 
@@ -55,6 +70,10 @@ table {
     
     margin-left: auto;
     margin-right: auto;
+}
+
+table, th, td {
+  border: 1px solid black;
 }
 
 tr {

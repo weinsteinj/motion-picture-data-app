@@ -13,7 +13,7 @@ export default {
   data () {
     return {
       newMovie: {
-        title: '',
+        name: '',
         description: '',
         year: null
       }

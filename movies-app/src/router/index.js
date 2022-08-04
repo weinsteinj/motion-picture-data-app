@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Add from '../views/Add.vue'
 import TestView from '../views/TestView.vue'
 import Table from '@/views/Table.vue'
+import Edit from '../views/Edit.vue'
 
 Vue.use(VueRouter)
 
@@ -27,7 +28,12 @@ const routes = [
     path: '/table',
     name: 'table',
     component: Table
-  }
+  },
+  {
+    path: '/edit',
+    name: 'edit',
+    component: Edit
+  },
 ]
 
 const router = new VueRouter({

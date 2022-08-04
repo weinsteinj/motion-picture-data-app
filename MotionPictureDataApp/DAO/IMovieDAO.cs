@@ -14,7 +14,7 @@ namespace MotionPictureDataApp.MovieDAO
 
         Movie GetMovieById(int movieId);
     
-        Movie UpdateMovie(NewMovieDTO newMovieDTO, int id);
+        Movie UpdateMovie(UpdateMovieDTO updateMovieDTO);
 
         void DeleteMovie(int Id);
     

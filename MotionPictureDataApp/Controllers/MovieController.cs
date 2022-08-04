@@ -50,9 +50,9 @@ namespace MotionPictureDataApp.Controllers
 
         [EnableCors("MyPolicy")]
         [HttpPut("{id}")]
-        public Movie UpdateMovie(NewMovieDTO newMovieDTO, int id) 
+        public Movie UpdateMovie(UpdateMovieDTO updateMovieDTO) 
         {
-            return movieDao.UpdateMovie(newMovieDTO, id);
+            return movieDao.UpdateMovie(updateMovieDTO);
         }
 
         [EnableCors("MyPolicy")]
