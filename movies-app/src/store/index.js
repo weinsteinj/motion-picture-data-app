@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import apiService from '../service/apiService'
 
 Vue.use(Vuex)
 
@@ -9,8 +8,8 @@ export default new Vuex.Store({
     movies: []
   },
   mutations: {
-    ADD__ALL_MOVIES () {
-      this.state.movies = apiService.allMovies()
+    ADD__ALL_MOVIES (state, movieArray) {
+      this.state.movies = movieArray;
     }
   },
   actions: {

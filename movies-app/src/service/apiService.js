@@ -1,26 +1,26 @@
 import axios from 'axios'
 
 const http = axios.create({
-  baseURL: 'http://localhost:5001/movie'
-})
+  baseURL: 'https://localhost:5001'
+});
 
 export default {
-  createNewMovie () {
-    return http.postForm('')
+  postNewMovie (movieBody) {
+    return http.post('/movie/', movieBody);
   },
 
-  allMovies () {
-    return http.get('')
+  getAllMovies () {
+    return http.get('/movie/');
   },
 
   getMovie (id) {
-    return http.get(`/${id}`)
+    return http.get(`/movie/${id}`);
   },
 
-  updateMovie (id) {
-    return http.putForm(`/${id}`)
+  updateMovie (id, movieBody) {
+    return http.put(`/movie/${id}`, movieBody);
   },
   deleteMovie (id) {
-    return http.delete(`/${id}`)
-  }
+    return http.delete(`/movie/${id}`);
+  },
 }

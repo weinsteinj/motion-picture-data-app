@@ -23,7 +23,8 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
+import apiService from '@/service/apiService.js'
 
 export default {
   name: 'add-movie',
@@ -35,22 +36,24 @@ export default {
         description: '',
         releaseYear: null,
       },
+      isValid: false,
     }
   },
   methods: {
     postMovie () {
-      // create body of post request, including parsing the year to an integer
+      
+      if (Number.parseInt(this.newMovie.releaseYear) > 2300 
+        || Number.parseInt(this.newMovie.releaseYear) < 1800
+        || isNaN(Number.parseInt(this.newMovie.releaseYear))
+      ) {
+        alert("Please enter a four-digit release year, then try again.");
+        return;
+      } else {
       const movieBody = {name: this.newMovie.name, description: this.newMovie.description, releaseYear: Number.parseInt(this.newMovie.releaseYear)};
-      // send the axios Http-POST request to back-end server
-      axios.post('https://localhost:5001/movie/', movieBody)
-       .then(response => console.log(response.data));
-      // send the axios Http-GET-All request to back-end server to refresh the table view after posting
-      axios.get('https://localhost:5001/movie/')
-       .then(response => (this.movieArray = response.data));
-       // clear the form data
-       this.resetMovieForm;
-       // re-route user to the main data table view
-       this.$router.push({name:'home'});
+      apiService.postNewMovie(movieBody);
+      this.resetMovieForm;
+      this.$router.push({name:'home'});
+      } 
     },
     resetMovieForm () {
       this.newMovie = {};
@@ -61,7 +64,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h3 {
   margin: 40px 0 0;

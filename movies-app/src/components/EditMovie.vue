@@ -22,7 +22,8 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
+import apiService from '@/service/apiService.js'
 
 export default {
   name: 'edit-movie',
@@ -42,18 +43,20 @@ export default {
   },
   methods: {
     updateMovie () {
-      // create body of PUT request, including parsing the year ((AND id)) to an integer
-      const movieBody = {id: this.updatedMovie.id, name: this.updatedMovie.name, description: this.updatedMovie.description, releaseYear: Number.parseInt(this.updatedMovie.releaseYear)};
-      // send the axios Http-PUT request to back-end server
-      axios.put(`https://localhost:5001/movie/${this.$route.params.id}`, movieBody)
-       .then(response => console.log(response.data));
-      // send the axios Http-GET-All request to back-end server to refresh the table view after posting
-      axios.get('https://localhost:5001/movie/')
-       .then(response => (this.movieArray = response.data));
-       // clear the form data
-       this.resetMovieForm;
-       // re-route user to the main data table view
-       this.$router.push({name:'home'});
+      if (Number.parseInt(this.updatedMovie.releaseYear) > 2300 
+        || Number.parseInt(this.updatedMovie.releaseYear) < 1800
+        || isNaN(Number.parseInt(this.updatedMovie.releaseYear))
+      ) {
+        alert("Please enter a four-digit release year, then try again.");
+        return;
+      } else {
+      const movieBody = {id: this.updatedMovie.id, name: this.updatedMovie.name, description: this.updatedMovie.description, 
+        releaseYear: Number.parseInt(this.updatedMovie.releaseYear)};
+      apiService.updateMovie(this.updatedMovie.id, movieBody);
+      // apiService.getAllMovies();
+      this.resetMovieForm;
+      this.$router.push({name:'home'});
+      }
     },
     resetMovieForm () {
       this.updatedMovie = {};
@@ -64,7 +67,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h3 {
   margin: 40px 0 0;

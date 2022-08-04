@@ -9,7 +9,7 @@
         <th>{{yearColHead}}</th>
         <th>{{actionsColHead}}</th>
       </tr>
-      <tr v-for="m in movieArray" v-bind:key="m.id">
+      <tr v-for="m in $store.state.movies" v-bind:key="m.id">
         <td>{{m.name}}</td>
         <td>{{m.description}}</td>
         <td>{{m.releaseYear}}</td>
@@ -32,6 +32,7 @@
 <script>
 import axios from 'axios'
 import FooterCog from '@/components/FooterCog.vue'
+import apiService from '@/service/apiService.js'
 
 export default {
   name: 'movie-table',
@@ -42,6 +43,7 @@ export default {
     return {
       movie: null,
       movieArray: [],
+      serviceArray: [],
       headerText: 'Welcome to Movie-Vue!',
       nameColHead: 'Name',
       descriptionColHead: 'Description',
@@ -50,10 +52,14 @@ export default {
     }
   },
   created () {
-    axios.get('https://localhost:5001/movie/10')
-      .then(response => (this.movie = response.data))
+    
     axios.get('https://localhost:5001/movie/')
       .then(response => (this.movieArray = response.data))
+    apiService.getAllMovies()
+        .then(response => {
+          this.serviceArray = response.data;
+          this.$store.commit('ADD__ALL_MOVIES', this.serviceArray)
+        }) 
   },
 
   methods: {
