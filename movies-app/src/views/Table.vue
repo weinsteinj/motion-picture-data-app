@@ -6,6 +6,7 @@
 import MovieTable from '@/components/MovieTable.vue'
 
 export default {
+  name: 'table-view',
     components: {
         MovieTable,
     },

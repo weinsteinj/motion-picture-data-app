@@ -31,4 +31,20 @@
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+#app, nav, div, h1  {
+  background-color: ivory;
+}
+
+h1 {
+  padding-bottom: 0%;
+  margin-bottom: 0%;
+}
+#app {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  min-height: 100vh; 
+}
+
 </style>

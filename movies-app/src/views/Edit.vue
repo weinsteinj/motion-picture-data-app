@@ -10,7 +10,7 @@
 import EditMovie from '@/components/EditMovie.vue'
 
 export default {
-  name: 'Home',
+  name: 'edit-view',
   data () {
     return {
       headerText: ''

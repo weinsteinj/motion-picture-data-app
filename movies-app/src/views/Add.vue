@@ -10,7 +10,7 @@
 import AddMovie from '@/components/AddMovie.vue'
 
 export default {
-  name: 'Home',
+  name: 'add-view',
   data () {
     return {
       headerText: ''

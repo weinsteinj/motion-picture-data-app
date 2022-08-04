@@ -24,14 +24,20 @@
       </tr>
      </table>
     </div>
+     <footer-cog></footer-cog>
   </body>
+  
 </template>
 
 <script>
 import axios from 'axios'
+import FooterCog from '@/components/FooterCog.vue'
 
 export default {
-  name: 'test-view',
+  name: 'movie-table',
+  components: {
+    FooterCog,
+  },
   data () {
     return {
       movie: null,
@@ -62,6 +68,9 @@ export default {
 </script>
 
 <style scoped>
+body {
+  background-color: ivory;
+}
 
 h1 {
    text-align: center;
@@ -73,7 +82,17 @@ table {
 }
 
 table, th, td {
-  border: 1px solid black;
+  border: 3px solid rgba(15, 25, 70, 0.616);
+}
+
+td {
+  padding: 10px;
+  text-align: left;
+  
+}
+
+td:nth-child(3) {
+  text-align: center;
 }
 
 tr {
@@ -81,8 +100,6 @@ tr {
 }
 #table-div {
     display: flex;
-    flex-grow: 1;
-    
 }
 
 /* td {

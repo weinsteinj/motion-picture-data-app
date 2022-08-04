@@ -1,12 +1,14 @@
 <template>
 <div>
-  <movie-table></movie-table>
+  <!-- <movie-table></movie-table>   -->
+  <boot-strap-table></boot-strap-table>
 </div>
 </template>
 
 <script>
 
 import axios from 'axios'
+
 
 export default {
   name: 'test-view',
@@ -15,6 +17,9 @@ export default {
       movie: null,
       movieArray: []
     }
+  },
+  components: {
+    
   },
   created () {
     axios.get('https://localhost:5001/movie/10')

@@ -9,7 +9,7 @@
 import MovieTable from '@/components/MovieTable.vue'
 
 export default {
-  name: 'Home',
+  name: 'home',
   data () {
     return {
       newMovie: {
