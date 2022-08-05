@@ -93,7 +93,7 @@ namespace MotionPictureDataApp.DAO
                 {
                     sqlConnect.Open();
                     SqlCommand command = new SqlCommand(
-                        "INSERT INTO MotionPictures ( Name, Description, ReleaseYear) VALUES(@Name, @Description, @ReleaseYear);", sqlConnect);
+                        "INSERT INTO MotionPictures ( Name, Description, ReleaseYear) OUTPUT INSERTED.Id VALUES(@Name, @Description, @ReleaseYear);", sqlConnect);
                     command.Parameters.AddWithValue("@Name", movie.Name);
                     command.Parameters.AddWithValue("@Description", movie.Description);
                     command.Parameters.AddWithValue("@ReleaseYear", movie.ReleaseYear);

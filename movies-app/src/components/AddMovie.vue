@@ -17,7 +17,10 @@
       required minlength="4" maxlength="4">
       <br>
       <br>
-      <button type="submit">Save</button>
+      <div>
+        <button type="submit">Save</button>
+        <button v-on:click.prevent="cancelEdit" type="cancel">Cancel</button>
+      </div>
     </form>
   </div>
 </template>
@@ -53,10 +56,14 @@ export default {
       apiService.postNewMovie(movieBody);
       this.resetMovieForm;
       this.$router.push({name:'home'});
+      apiService.getAllMovies();
       } 
     },
     resetMovieForm () {
       this.newMovie = {};
+    },
+    cancelEdit () {
+      this.$router.push({name:'home'});
     },
   },
   props: {

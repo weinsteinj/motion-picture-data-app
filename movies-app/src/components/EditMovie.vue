@@ -16,7 +16,12 @@
       required minlength="4" maxlength="4">
       <br>
       <br>
+      <div>
       <button type="submit">Save</button>
+      <button v-on:click.prevent="cancelEdit" type="cancel">Cancel</button>
+      <button v-on:click.prevent="confirmAndDelete" type="delete">Delete</button>
+
+      </div>
     </form>
   </div>
 </template>
@@ -60,6 +65,19 @@ export default {
     },
     resetMovieForm () {
       this.updatedMovie = {};
+    },
+    confirmAndDelete () {
+      if (
+        confirm('Do you wish to delete this movie record? NB: This action cannot be undone.')
+      ) {
+      apiService.deleteMovie(this.updatedMovie.id);
+      this.resetMovieForm;
+      this.$router.push({name:'home'});
+      apiService.getAllMovies();
+      }
+    },
+    cancelEdit () {
+      this.$router.push({name:'home'});
     },
   },
   props: {

@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace MotionPictureDataApp
 {
@@ -6,10 +7,16 @@ namespace MotionPictureDataApp
     {
        
         public int Id { get; set; }
+
+        [Required]
+        [StringLength(50)]
         public string Name { get; set; }
 
+        [StringLength(500)]
         public string Description { get; set; }
 
+        [Required]
+        [Range(1800,2300)]
         public int ReleaseYear { get; set; }
 
 
