@@ -4,22 +4,27 @@
     <form v-on:submit.prevent="postMovie">
       <label for="name">Name:</label><br>
       <input type="text" placeholder="Name" v-model="newMovie.name" maxlength="50" minlength="1" 
-      id="title-input" required>
+      id="title-input" required >
       <br>
       <br>
       <label for="description">Description:</label><br>
-      <textarea rows="10" cols="100" id="description-text" placeholder="Description" 
+      <textarea rows="10" cols="50" id="description-text" placeholder="Description" 
       v-model="newMovie.description" maxlength="500"></textarea>
       <br>
       <br>
       <label for="releaseYear" >Release Year:</label><br>
-      <input type="text" placeholder="Release Year" v-model="newMovie.releaseYear" 
-      required minlength="4" maxlength="4">
+      <input type="number" placeholder="Release Year" oninvalid="this.setCustomValidity('Please enter the four-digit release year.')" 
+      v-model="newMovie.releaseYear" 
+      required min=1800 max=2300 @click="{isInvalidYear : false}" v-bind:class="{isInvalid: isInvalidYear}">
       <br>
       <br>
-      <div>
-        <button type="submit">Save</button>
-        <button v-on:click.prevent="cancelEdit" type="cancel">Cancel</button>
+      <div id="action-button-area">
+        <div></div>
+        <div>
+          <button type="submit">Save</button>
+          <button v-on:click.prevent="cancelEdit" type="cancel">Cancel</button>
+        </div>
+        <div></div>
       </div>
     </form>
   </div>
@@ -40,18 +45,21 @@ export default {
         releaseYear: null,
       },
       isValid: false,
+      isInvalidYear: false,
     }
   },
   methods: {
     postMovie () {
-      
+     // let validateMovieName;
       if (Number.parseInt(this.newMovie.releaseYear) > 2300 
         || Number.parseInt(this.newMovie.releaseYear) < 1800
         || isNaN(Number.parseInt(this.newMovie.releaseYear))
       ) {
+        this.isInvalidYear = true;
         alert("Please enter a four-digit release year, then try again.");
         return;
       } else {
+      this.isInvalidYear = false;
       const movieBody = {name: this.newMovie.name, description: this.newMovie.description, releaseYear: Number.parseInt(this.newMovie.releaseYear)};
       apiService.postNewMovie(movieBody);
       this.resetMovieForm;
@@ -86,7 +94,28 @@ li {
 a {
   color: #42b983;
 }
-#title-input {
+/* #title-input {
   width: 30%
+} */
+#action-button-area {
+      display: flex;
+      justify-content: space-around;
 }
+#action-button-area div {
+      display: flex;
+      justify-content: space-evenly;
+}
+input:invalid {
+    border: 2px solid red;
+}
+
+input:valid {
+    border: 2px solid black;
+}
+/* .isInvalid {
+  border: 8px solid red;
+} */
+
+
+
 </style>

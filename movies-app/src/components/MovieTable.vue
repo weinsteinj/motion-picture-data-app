@@ -1,6 +1,11 @@
 <template>
   <body>
-    <h1>{{headerText}}</h1>
+    <div id="main-bar">
+      <div></div>
+      <h1>{{headerText}}</h1>
+      <div> <router-link to="/add" class="btn">Add +</router-link> </div>
+    </div>
+    
     <div id="table-div">
      <table>
       <tr>
@@ -15,11 +20,12 @@
         <td>{{m.releaseYear}}</td>
         <td>
           <router-link v-bind:to="{name: 'edit', params: {id: m.id, name: m.name, description: m.description, releaseYear: m.releaseYear}}">
-            <button v-on:click="loadEditForm">Edit</button>
+            <button>Edit</button>
           </router-link>
-            
+          <router-link v-bind:to="{name: 'copy', params: {id: m.id, name: m.name, description: m.description, releaseYear: m.releaseYear}}">  
           <button>Copy</button>
-          <button>Delete</button>
+          </router-link>
+           <!-- <button>Delete</button> -->
         </td>
       </tr>
      </table>
@@ -30,7 +36,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 import FooterCog from '@/components/FooterCog.vue'
 import apiService from '@/service/apiService.js'
 
@@ -43,37 +49,52 @@ export default {
     return {
       movie: null,
       movieArray: [],
-      serviceArray: [],
       headerText: 'Welcome to Movie-Vue!',
       nameColHead: 'Name',
       descriptionColHead: 'Description',
       yearColHead: 'Release Year',
       actionsColHead: 'Actions',
+      movieInfoToCopy: '',
     }
   },
   created () {
-    
-    axios.get('https://localhost:5001/movie/')
-      .then(response => (this.movieArray = response.data))
     apiService.getAllMovies()
         .then(response => {
-          this.serviceArray = response.data;
-          this.$store.commit('ADD__ALL_MOVIES', this.serviceArray)
+          this.movieArray = response.data;
+          this.$store.commit('ADD__ALL_MOVIES', this.movieArray)
         }) 
   },
 
   methods: {
-    loadEditForm () {
-     // this.$router.push({name: "edit"}, params:})
-        // to do --> load edit view
-
+    
      },
-  }
+    copyMovie (id) {
+      let movieToCopy;
+      apiService.getMovie(id)
+       .then(response => {
+         if (response.status === 200) { 
+            movieToCopy = response.data;
+            this.movieToCopy = movieToCopy;
+            } 
+       }); 
+    }
 }
 
 </script>
 
 <style scoped>
+#main-bar {
+  display: flex;
+}
+#main-bar h1 {
+  flex-basis: 60;
+
+}
+#main-bar div {
+ justify-content: right;
+
+}
+
 body {
   background-color: ivory;
 }
@@ -91,6 +112,10 @@ table, th, td {
   border: 3px solid rgba(15, 25, 70, 0.616);
 }
 
+th {
+  padding: 10px;
+}
+
 td {
   padding: 10px;
   text-align: left;
@@ -106,6 +131,15 @@ tr {
 }
 #table-div {
     display: flex;
+}
+
+.btn {
+    background-color: lightgreen;
+    color: light green;
+    border-color: midnightblue;
+    border-radius: 8px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.18);
+    font-size: 1.25em;
 }
 
 /* td {

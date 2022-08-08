@@ -5,6 +5,8 @@ import Add from '../views/Add.vue'
 import TestView from '../views/TestView.vue'
 import Table from '@/views/Table.vue'
 import Edit from '../views/Edit.vue'
+import Copy from '@/views/Copy.vue'
+//   import { component } from 'vue/types/umd'
 
 Vue.use(VueRouter)
 
@@ -33,6 +35,11 @@ const routes = [
     path: '/edit',
     name: 'edit',
     component: Edit
+  },
+  {
+    path: '/copy',
+    name: 'copy',
+    component: Copy
   },
 ]
 
