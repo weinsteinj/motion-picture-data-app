@@ -17,9 +17,9 @@ namespace MotionPictureDataApp.DAO
         {
             connectionString = dbConnectionString;
         }
-            
-            public List<Movie> AllMovies()
-            {
+
+        public List<Movie> AllMovies()
+        {
             List<Movie> allMovies = new List<Movie> { };
 
             try
@@ -47,10 +47,10 @@ namespace MotionPictureDataApp.DAO
             }
 
             return allMovies;
-            }
+        }
 
-            public Movie GetMovieById(int id) 
-            {
+        public Movie GetMovieById(int id)
+        {
             Movie movie = new Movie();
 
             try
@@ -67,7 +67,7 @@ namespace MotionPictureDataApp.DAO
                     if (sqlReader.Read())
                     {
                         movie = MapMovieFromReader(sqlReader);
-                    
+
                     }
                 }
             }
@@ -75,14 +75,12 @@ namespace MotionPictureDataApp.DAO
             {
                 throw;
             }
-
             return movie;
-            }
+        }
 
-            public Movie AddMovie(NewMovieDTO newMovieDTO)
-            {
+        public Movie AddMovie(NewMovieDTO newMovieDTO)
+        {
             Movie movie = new Movie();
-
             movie.Name = newMovieDTO.Name;
             movie.Description = newMovieDTO.Description;
             movie.ReleaseYear = newMovieDTO.ReleaseYear;
@@ -108,11 +106,11 @@ namespace MotionPictureDataApp.DAO
             }
 
             return movie;
-            }
+        }
 
-            public Movie UpdateMovie(UpdateMovieDTO updateMovieDTO)
-            {
-            Movie updatedMovie = new Movie ();
+        public Movie UpdateMovie(UpdateMovieDTO updateMovieDTO)
+        {
+            Movie updatedMovie = new Movie();
 
             updatedMovie.Id = updateMovieDTO.Id;
             updatedMovie.Name = updateMovieDTO.Name;
@@ -145,10 +143,10 @@ namespace MotionPictureDataApp.DAO
 
 
             return updatedMovie;
-            }
+        }
 
-            public void DeleteMovie(int id)
-            {
+        public void DeleteMovie(int id)
+        {
             try
             {
                 using (SqlConnection sqlConnect = new SqlConnection(connectionString))
@@ -165,12 +163,12 @@ namespace MotionPictureDataApp.DAO
             catch (SqlException)
             {
                 throw;
-           }
+            }
 
-    
-       }
 
-            private Movie MapMovieFromReader (SqlDataReader sqlReader)
+        }
+
+        private Movie MapMovieFromReader(SqlDataReader sqlReader)
         {
             Movie mappedMovie = new Movie();
 
@@ -180,15 +178,15 @@ namespace MotionPictureDataApp.DAO
             mappedMovie.ReleaseYear = Convert.ToInt32(sqlReader["ReleaseYear"]);
 
             return mappedMovie;
-        
-
-
-        }
-
-
-
 
 
 
         }
+
+
+
+
+
+
+    }
 }

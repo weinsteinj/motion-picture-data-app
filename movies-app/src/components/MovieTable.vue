@@ -25,6 +25,8 @@
           <router-link v-bind:to="{name: 'copy', params: {id: m.id, name: m.name, description: m.description, releaseYear: m.releaseYear}}">  
           <button>Copy</button>
           </router-link>
+          <button v-on:click.prevent="confirmAndDelete(m.id)" type="delete">Delete</button>
+          <!-- <button v-bind:key="m.id" v-on:click.prevent="confirmAndDelete(m.id)" type="delete">Delete</button> -->
            <!-- <button>Delete</button> -->
         </td>
       </tr>
@@ -66,8 +68,6 @@ export default {
   },
 
   methods: {
-    
-     },
     copyMovie (id) {
       let movieToCopy;
       apiService.getMovie(id)
@@ -77,7 +77,22 @@ export default {
             this.movieToCopy = movieToCopy;
             } 
        }); 
-    }
+    },
+    confirmAndDelete (id) {
+      if (
+        confirm('Do you wish to delete this movie record? NB: This action cannot be undone.')
+      ) {
+      apiService.deleteMovie(id);
+      apiService.getAllMovies()
+        .then(response => {
+          this.movieArray = response.data;
+          this.$store.commit('ADD__ALL_MOVIES', this.movieArray)
+        });
+      }
+    },
+    
+  },
+    
 }
 
 </script>

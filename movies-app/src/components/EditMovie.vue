@@ -4,7 +4,8 @@
     <form v-on:submit.prevent="updateMovie">
       <label  for="name">Name:</label><br>
       <input id="movie-name" type="text" placeholder="Name" v-model="updatedMovie.name" 
-      value="Old Title" required maxlength="50" minlength="1">
+      value="Old Title" required maxlength="50" minlength="1" >
+      
       <br>
       <label for="description">Description:</label><br>
       <textarea rows="10" cols="50" id="description-text" placeholder="Description" 
@@ -13,7 +14,8 @@
       <br>
       <label for="releaseYear" >Release Year:</label><br>
       <input id="movie-year" type="number" placeholder="Release Year" v-model="updatedMovie.releaseYear" 
-      required min=1800 max=2300 oninvalid="this.setCustomValidity('Please enter the four-digit release year.')">
+      required min=1800 max=2300 >
+      
       <br>
       <br>
       <div id="action-button-area">

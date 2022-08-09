@@ -4,7 +4,7 @@
     <form v-on:submit.prevent="postMovie">
       <label for="name">Name:</label><br>
       <input type="text" placeholder="Name" v-model="newMovie.name" maxlength="50" minlength="1" 
-      id="title-input" required >
+      id="title-input" required>
       <br>
       <br>
       <label for="description">Description:</label><br>
@@ -13,9 +13,9 @@
       <br>
       <br>
       <label for="releaseYear" >Release Year:</label><br>
-      <input type="number" placeholder="Release Year" oninvalid="this.setCustomValidity('Please enter the four-digit release year.')" 
+      <input type="number" placeholder="Release Year" 
       v-model="newMovie.releaseYear" 
-      required min=1800 max=2300 @click="{isInvalidYear : false}" v-bind:class="{isInvalid: isInvalidYear}">
+      required min=1800 max=2300>
       <br>
       <br>
       <div id="action-button-area">
@@ -44,8 +44,6 @@ export default {
         description: '',
         releaseYear: null,
       },
-      isValid: false,
-      isInvalidYear: false,
     }
   },
   methods: {
