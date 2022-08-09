@@ -51,7 +51,7 @@ export default {
     return {
       movie: null,
       movieArray: [],
-      headerText: 'Welcome to Movie-Vue!',
+      headerText: ' Welcome to Movie-Vue! ',
       nameColHead: 'Name',
       descriptionColHead: 'Description',
       yearColHead: 'Release Year',
@@ -124,18 +124,24 @@ body {
 
 h1 {
    text-align: center;
+   box-shadow: 15px 15px 50px rgba(0, 0, 0, 0.20);
+   border-radius: 8px;
+   
 }
 table {
     
     margin-left: auto;
     margin-right: auto;
-
-
+    border-radius: 8px;
+    box-shadow: 30px 30px 10px rgba(0, 0, 0, 0.30);
+    font-size: 1em;
 
 }
 
 table, th, td {
   border: 3px solid rgba(18, 118, 148, 0.315);
+  
+    
 }
 
 th {
@@ -178,6 +184,9 @@ tr {
 
 .btn-edit {
   background-color: greenyellow;
+}
+tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.123);
 }
 
 /* td {

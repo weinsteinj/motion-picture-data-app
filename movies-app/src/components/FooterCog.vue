@@ -16,8 +16,10 @@ p {
 }
 #footer {
   display: flex;
+  
 }
 body div {
   flex-grow: 1;
+  
 }
 </style>
