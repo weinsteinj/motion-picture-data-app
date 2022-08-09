@@ -57,7 +57,12 @@ export default {
       // } else {
       const movieBody = {id: this.copiedMovie.id, name: this.copiedMovie.name, description: this.copiedMovie.description, 
         releaseYear: Number.parseInt(this.copiedMovie.releaseYear)};
-      apiService.postNewMovie(movieBody);
+      apiService.postNewMovie(movieBody)
+       .then(response => {
+         if (response.status === 200) {
+           alert("Movie record successfully saved!")
+         }
+       });
       this.resetMovieForm;
       let movieArray;
       apiService.getAllMovies()

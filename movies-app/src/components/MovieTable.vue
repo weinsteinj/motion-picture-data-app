@@ -20,12 +20,12 @@
         <td>{{m.releaseYear}}</td>
         <td>
           <router-link v-bind:to="{name: 'edit', params: {id: m.id, name: m.name, description: m.description, releaseYear: m.releaseYear}}">
-            <button>Edit</button>
+            <button class="btn btn-edit"> Edit </button>
           </router-link>
           <router-link v-bind:to="{name: 'copy', params: {id: m.id, name: m.name, description: m.description, releaseYear: m.releaseYear}}">  
-          <button>Copy</button>
+          <button class="btn btn-copy"> Copy </button>
           </router-link>
-          <button v-on:click.prevent="confirmAndDelete(m.id)" type="delete">Delete</button>
+          <button class="btn btn-delete" v-on:click.prevent="confirmAndDelete(m.id)" type="delete">Delete</button>
           <!-- <button v-bind:key="m.id" v-on:click.prevent="confirmAndDelete(m.id)" type="delete">Delete</button> -->
            <!-- <button>Delete</button> -->
         </td>
@@ -82,11 +82,18 @@ export default {
       if (
         confirm('Do you wish to delete this movie record? NB: This action cannot be undone.')
       ) {
-      apiService.deleteMovie(id);
+      apiService.deleteMovie(id)
+      .then(response => {
+         if (response.status === 200) {
+           alert("Movie record successfully saved!")
+         }
+       });
       apiService.getAllMovies()
         .then(response => {
+          if (response.status === 200) {
           this.movieArray = response.data;
-          this.$store.commit('ADD__ALL_MOVIES', this.movieArray)
+          this.$store.commit('ADD__ALL_MOVIES', this.movieArray);
+          }
         });
       }
     },
@@ -155,6 +162,18 @@ tr {
     border-radius: 8px;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.18);
     font-size: 1.25em;
+}
+
+.btn-delete {
+  background-color: lightcoral;
+}
+
+.btn-copy {
+  background-color: skyblue;
+}
+
+.btn-edit {
+  background-color: greenyellow;
 }
 
 /* td {

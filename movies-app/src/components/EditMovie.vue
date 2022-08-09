@@ -64,8 +64,11 @@ export default {
       let movieArray;
       apiService.getAllMovies()
         .then(response => {
+         if (response.status === 200) {
+           alert("Movie record successfully edited!")
           movieArray = response.data;
           this.$store.commit('ADD__ALL_MOVIES', movieArray)
+          }
         });
       this.$router.push({name:'home'});
       }
@@ -77,13 +80,20 @@ export default {
       if (
         confirm('Do you wish to delete this movie record? NB: This action cannot be undone.')
       ) {
-      apiService.deleteMovie(this.updatedMovie.id);
+      apiService.deleteMovie(this.updatedMovie.id)
+      .then(response => {
+         if (response.status === 200) {
+           alert("Movie record successfully saved!")
+         }
+       });
       this.resetMovieForm;
       let movieArray;
       apiService.getAllMovies()
         .then(response => {
+          if (response.status === 200) {
           movieArray = response.data;
           this.$store.commit('ADD__ALL_MOVIES', movieArray)
+          }
         });
       this.$router.push({name:'home'});
       }

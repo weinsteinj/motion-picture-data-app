@@ -59,10 +59,22 @@ export default {
       } else {
       this.isInvalidYear = false;
       const movieBody = {name: this.newMovie.name, description: this.newMovie.description, releaseYear: Number.parseInt(this.newMovie.releaseYear)};
-      apiService.postNewMovie(movieBody);
+      apiService.postNewMovie(movieBody)
+       .then(response => {
+         if (response.status === 200) {
+           alert("Movie record successfully saved!")
+         }
+       });
       this.resetMovieForm;
       this.$router.push({name:'home'});
-      apiService.getAllMovies();
+      apiService.getAllMovies()
+      .then(response => {
+          if (response.status === 200) {
+          let movieArray;
+          movieArray = response.data;
+          this.$store.commit('ADD__ALL_MOVIES', movieArray);
+          }
+        });
       } 
     },
     resetMovieForm () {
