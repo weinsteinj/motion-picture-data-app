@@ -2,11 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Add from '../views/Add.vue'
-import TestView from '../views/TestView.vue'
 import Table from '@/views/Table.vue'
 import Edit from '../views/Edit.vue'
 import Copy from '@/views/Copy.vue'
-//   import { component } from 'vue/types/umd'
 
 Vue.use(VueRouter)
 
@@ -20,11 +18,6 @@ const routes = [
     path: '/add',
     name: 'add',
     component: Add
-  },
-  {
-    path: '/test',
-    name: 'test-view',
-    component: TestView
   },
   {
     path: '/table',

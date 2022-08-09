@@ -85,7 +85,7 @@ export default {
       apiService.deleteMovie(id)
       .then(response => {
          if (response.status === 200) {
-           alert("Movie record successfully saved!")
+           alert("Movie record successfully deleted!")
          }
        });
       apiService.getAllMovies()

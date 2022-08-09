@@ -83,7 +83,7 @@ export default {
       apiService.deleteMovie(this.updatedMovie.id)
       .then(response => {
          if (response.status === 200) {
-           alert("Movie record successfully saved!")
+           alert("Movie record successfully deleted!")
          }
        });
       this.resetMovieForm;
