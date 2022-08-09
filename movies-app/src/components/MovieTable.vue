@@ -85,6 +85,7 @@ export default {
       apiService.deleteMovie(id)
       .then(response => {
          if (response.status === 200) {
+           this.$router.go(0);
            alert("Movie record successfully deleted!")
          }
        });
@@ -128,10 +129,13 @@ table {
     
     margin-left: auto;
     margin-right: auto;
+
+
+
 }
 
 table, th, td {
-  border: 3px solid rgba(15, 25, 70, 0.616);
+  border: 3px solid rgba(18, 118, 148, 0.315);
 }
 
 th {
