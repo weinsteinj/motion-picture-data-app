@@ -68,9 +68,9 @@ export default {
            alert("Movie record successfully edited!")
           movieArray = response.data;
           this.$store.commit('ADD__ALL_MOVIES', movieArray)
+          this.$router.push({name:'home'});
           }
         });
-      this.$router.push({name:'home'});
       }
     },
     resetMovieForm () {
@@ -92,10 +92,11 @@ export default {
         .then(response => {
           if (response.status === 200) {
           movieArray = response.data;
-          this.$store.commit('ADD__ALL_MOVIES', movieArray)
+          this.$store.commit('ADD__ALL_MOVIES', movieArray);
+          this.$router.push({name:'home'});
           }
         });
-      this.$router.push({name:'home'});
+      
       }
     },
     cancelEdit () {

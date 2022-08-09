@@ -29,7 +29,6 @@
 </template>
 
 <script>
-// import axios from 'axios'
 import apiService from '@/service/apiService.js'
 
 export default {
@@ -48,13 +47,6 @@ export default {
   },
   methods: {
     copyMovie () {
-      // if (Number.parseInt(this.copiedMovie.releaseYear) > 2300 
-      //   || Number.parseInt(this.copiedMovie.releaseYear) < 1800
-      //   || isNaN(Number.parseInt(this.copiedMovie.releaseYear))
-      // ) {
-      //   alert("Please enter a four-digit release year, then try again.");
-      //   return;
-      // } else {
       const movieBody = {id: this.copiedMovie.id, name: this.copiedMovie.name, description: this.copiedMovie.description, 
         releaseYear: Number.parseInt(this.copiedMovie.releaseYear)};
       apiService.postNewMovie(movieBody)
@@ -67,34 +59,17 @@ export default {
       let movieArray;
       apiService.getAllMovies()
         .then(response => {
-          movieArray = response.data;
+          movieArray = response.data
           this.$store.commit('ADD__ALL_MOVIES', movieArray)
+          this.$router.push({name:'home'});
         });
-      this.$router.push({name:'home'});
-      // }
     },
     resetMovieForm () {
       this.copiedMovie = {};
     },
     resetFieldValid () {
       this.$event.target.addClass("valid");
-
     },
-    // confirmAndDelete () {
-    //   if (
-    //     confirm('Do you wish to delete this movie record? NB: This action cannot be undone.')
-    //   ) {
-    //   apiService.deleteMovie(this.updatedMovie.id);
-    //   this.resetMovieForm;
-    //   let movieArray;
-    //   apiService.getAllMovies()
-    //     .then(response => {
-    //       movieArray = response.data;
-    //       this.$store.commit('ADD__ALL_MOVIES', movieArray)
-    //     });
-    //   this.$router.push({name:'home'});
-    //   }
-    // },
     cancelEdit () {
       this.$router.push({name:'home'});
     },

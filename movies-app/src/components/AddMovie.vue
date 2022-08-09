@@ -66,13 +66,13 @@ export default {
          }
        });
       this.resetMovieForm;
-      this.$router.push({name:'home'});
       apiService.getAllMovies()
       .then(response => {
           if (response.status === 200) {
           let movieArray;
           movieArray = response.data;
           this.$store.commit('ADD__ALL_MOVIES', movieArray);
+          this.$router.push({name:'home'});
           }
         });
       } 
