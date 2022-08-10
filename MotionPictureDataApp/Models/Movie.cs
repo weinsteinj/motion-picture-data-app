@@ -19,7 +19,6 @@ namespace MotionPictureDataApp
         [Range(1800,2300)]
         public int ReleaseYear { get; set; }
 
-
         public Movie(string name, int releaseYear, string description)
         {
             Name = name;
@@ -28,8 +27,7 @@ namespace MotionPictureDataApp
         }
 
         public Movie()
-        {
-            
+        {  
         }
 
     }

@@ -31,7 +31,6 @@
 </template>
 
 <script>
-// import axios from 'axios'
 import apiService from '@/service/apiService.js'
 
 export default {
@@ -47,16 +46,8 @@ export default {
     }
   },
   methods: {
+    // if form data is validated, sends POST request to server (with back-up validation)
     postMovie () {
-     // let validateMovieName;
-      if (Number.parseInt(this.newMovie.releaseYear) > 2300 
-        || Number.parseInt(this.newMovie.releaseYear) < 1800
-        || isNaN(Number.parseInt(this.newMovie.releaseYear))
-      ) {
-        this.isInvalidYear = true;
-        alert("Please enter a four-digit release year, then try again.");
-        return;
-      } else {
       this.isInvalidYear = false;
       const movieBody = {name: this.newMovie.name, description: this.newMovie.description, releaseYear: Number.parseInt(this.newMovie.releaseYear)};
       apiService.postNewMovie(movieBody)
@@ -66,6 +57,7 @@ export default {
          }
        });
       this.resetMovieForm;
+      // api call returns promise; if status is OKAY, data received is used to mutate datastore before hiding form;
       apiService.getAllMovies()
       .then(response => {
           if (response.status === 200) {
@@ -75,7 +67,6 @@ export default {
           this.$router.push({name:'home'});
           }
         });
-      } 
     },
     resetMovieForm () {
       this.newMovie = {};
@@ -104,9 +95,7 @@ li {
 a {
   color: #42b983;
 }
-/* #title-input {
-  width: 30%
-} */
+
 #action-button-area {
       display: flex;
       justify-content: space-around;
@@ -122,10 +111,4 @@ input:invalid {
 input:valid {
     border: 2px solid black;
 }
-/* .isInvalid {
-  border: 8px solid red;
-} */
-
-
-
 </style>

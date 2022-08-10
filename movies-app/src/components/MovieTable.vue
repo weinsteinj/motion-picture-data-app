@@ -26,8 +26,6 @@
           <button class="btn btn-copy"> Copy </button>
           </router-link>
           <button class="btn btn-delete" v-on:click.prevent="confirmAndDelete(m.id)" type="delete">Delete</button>
-          <!-- <button v-bind:key="m.id" v-on:click.prevent="confirmAndDelete(m.id)" type="delete">Delete</button> -->
-           <!-- <button>Delete</button> -->
         </td>
       </tr>
      </table>
@@ -38,7 +36,6 @@
 </template>
 
 <script>
-// import axios from 'axios'
 import FooterCog from '@/components/FooterCog.vue'
 import apiService from '@/service/apiService.js'
 
@@ -65,7 +62,6 @@ export default {
     moviesSortedByName() {
       return this.sortMoviesByName(this.movieArray);
     }
-
   },
   created () {
     apiService.getAllMovies()
@@ -106,6 +102,7 @@ export default {
         });
       }
     },
+    // sort methods for each v-on:click at column heads, with toggle via boolean ascendingSort asc/desc
     sortMoviesByName () {
       if (this.ascendingSort === true) {
         this.movieArray.sort((a,b) => a.name.localeCompare(b.name));
@@ -136,7 +133,6 @@ export default {
     },
   }
 }
-
 </script>
 
 <style scoped>
@@ -145,60 +141,44 @@ export default {
 }
 #main-bar h1 {
   flex-basis: 60;
-
 }
 #main-bar div {
  justify-content: right;
-
 }
-
 body {
   background-color: var(--main-background);
 }
-
 h1 {
    text-align: center;
    box-shadow: 15px 15px 50px rgba(0, 0, 0, 0.20);
-   border-radius: 8px;
-   
+   border-radius: 8px;  
 }
 table {
-    
     margin-left: auto;
     margin-right: auto;
     border-radius: 8px;
     box-shadow: 30px 30px 10px rgba(0, 0, 0, 0.30);
     font-size: 1em;
-
 }
-
 table, th, td {
   border: 3px solid rgba(18, 118, 148, 0.315);
-  
-    
 }
-
 th {
   padding: 10px;
 }
-
 td {
   padding: 10px;
   text-align: left;
-  
 }
-
 td:nth-child(3) {
   text-align: center;
 }
-
 tr {
     min-height: 50px;
 }
 #table-div {
     display: flex;
 }
-
 .btn {
     background-color: lightgreen;
     color: light green;
@@ -207,31 +187,16 @@ tr {
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.18);
     font-size: 1.25em;
 }
-
 .btn-delete {
   background-color: lightcoral;
 }
-
 .btn-copy {
   background-color: skyblue;
 }
-
 .btn-edit {
   background-color: greenyellow;
 }
 tr:nth-child(even) {
   background-color: rgba(0, 0, 0, 0.123);
 }
-
-
-/* td {
-    margin-left: 10 px;
-    margin-right: 10px;
-}
-thead {
-    font-size: 50pt;
-    min-width: 20%;
-    margin-left: 50px;
-    margin-right: 50px;
-} */
 </style>

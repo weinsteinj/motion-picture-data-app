@@ -31,30 +31,18 @@
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.18);
     font-size: 1.25em;
 }
-
 .btn-delete {
   background-color: lightcoral;
 }
-
-.btn-copy, .btn-save {
+.btn-copy {
   background-color: skyblue;
 }
-
+.btn-save {
+  background-color: skyblue;
+}
 .btn-edit {
   background-color: greenyellow;
 }
-
 .btn-cancel {
   background-color: var(--green-grey-shading);
 }
-
-
-
-/* form {
-    max-width: 50%;
-    margin: auto;
-    border: 10px solid rgba(15, 134, 11, 0.48);
-    border-radius: 8px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-  } */

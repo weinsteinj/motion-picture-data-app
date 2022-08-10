@@ -31,7 +31,6 @@
 </template>
 
 <script>
-// import axios from 'axios'
 import apiService from '@/service/apiService.js'
 
 export default {
@@ -45,23 +44,17 @@ export default {
         description: this.$route.params.description,
         releaseYear: this.$route.params.releaseYear,
       },
-      
     }
   },
   methods: {
+    // if form data is validated, sends PUT request to server (with back-up validation)
     updateMovie () {
-      if (Number.parseInt(this.updatedMovie.releaseYear) > 2300 
-        || Number.parseInt(this.updatedMovie.releaseYear) < 1800
-        || isNaN(Number.parseInt(this.updatedMovie.releaseYear))
-      ) {
-        alert("Please enter a four-digit release year, then try again.");
-        return;
-      } else {
       const movieBody = {id: this.updatedMovie.id, name: this.updatedMovie.name, description: this.updatedMovie.description, 
         releaseYear: Number.parseInt(this.updatedMovie.releaseYear)};
       apiService.updateMovie(this.updatedMovie.id, movieBody);
       this.resetMovieForm;
       let movieArray;
+      // api call returns promise; if status is OKAY, data received is used to mutate datastore before hiding form;
       apiService.getAllMovies()
         .then(response => {
          if (response.status === 200) {
@@ -71,7 +64,6 @@ export default {
           this.$router.push({name:'home'});
           }
         });
-      }
     },
     resetMovieForm () {
       this.updatedMovie = {};
@@ -96,7 +88,6 @@ export default {
           this.$router.push({name:'home'});
           }
         });
-      
       }
     },
     cancelEdit () {
@@ -131,22 +122,10 @@ a {
       display: flex;
       justify-content: space-evenly;
 }
-
 input:invalid {
     border: 2px solid red;
 }
 input:valid {
     border: 2px solid black;
 }
-/* form {
-    max-width: 50%;
-    margin: auto;
-    border: 10px solid rgba(15, 134, 11, 0.48);
-    border-radius: 8px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-  } */
-
-
-
 </style>

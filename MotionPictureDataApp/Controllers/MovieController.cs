@@ -17,8 +17,6 @@ namespace MotionPictureDataApp.Controllers
     public class MovieController : ControllerBase
     {
         private readonly IMovieDAO movieDao;
-
-
         public MovieController(IMovieDAO movieDAO)
         {
             this.movieDao = movieDAO;
@@ -28,7 +26,6 @@ namespace MotionPictureDataApp.Controllers
         [HttpPost]
         public Movie PostNewMovie(NewMovieDTO newMovieDTO) 
         {
-
             return movieDao.AddMovie(newMovieDTO);
         }
 
@@ -37,7 +34,6 @@ namespace MotionPictureDataApp.Controllers
         public IList<Movie> AllMovies()
         {
             return movieDao.AllMovies();
-
         }
 
         [EnableCors("MyPolicy")]
@@ -45,7 +41,6 @@ namespace MotionPictureDataApp.Controllers
         public Movie GetMovieById(int id)
         {
             return movieDao.GetMovieById(id);
-
         }
 
         [EnableCors("MyPolicy")]
@@ -61,8 +56,5 @@ namespace MotionPictureDataApp.Controllers
         {
             movieDao.DeleteMovie(id);
         }
-
-
-
     }
 }

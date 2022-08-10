@@ -24,11 +24,9 @@ namespace MotionPictureDataApp.Models
             Name = name;
             Description = description;
             ReleaseYear = releaseYear;
-       
         }
         public NewMovieDTO()
         {
-   
         }
     }
 }

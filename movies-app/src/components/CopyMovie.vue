@@ -20,7 +20,6 @@
         <div></div>
         <div><button class="btn-save" type="submit">Save</button>
         <button class="btn-cancel" v-on:click.prevent="cancelEdit" type="cancel">Cancel</button>
-        <!-- <button v-on:click.prevent="confirmAndDelete" type="delete">Delete</button> -->
         </div>
         <div></div>
       </div>
