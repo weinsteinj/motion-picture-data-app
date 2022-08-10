@@ -16,10 +16,5 @@ INSERT INTO MotionPictures (Name, Description, ReleaseYear)
 VALUES ('Space Skirmish Part 3', 'Black Holes and Beyond', 2005);
 INSERT INTO MotionPictures (Name, Description, ReleaseYear) 
 VALUES ('Space Skirmish Part 4', 'Jupiter on Fire', 2018);
-
-SELECT * FROM MotionPictures;
-
 INSERT INTO MotionPictures ( Name, Description, ReleaseYear) 
 VALUES ('Space Balls', 'Judy-Jan', 2000);
-
-DELETE FROM MotionPictures WHERE Id = 1;
