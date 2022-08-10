@@ -33,16 +33,20 @@
 }
 .btn-delete {
   background-color: lightcoral;
+  border-radius: 8px;
 }
 .btn-copy {
   background-color: skyblue;
 }
 .btn-save {
   background-color: skyblue;
+  border-radius: 8px;
 }
 .btn-edit {
   background-color: greenyellow;
+  border-radius: 8px;
 }
 .btn-cancel {
   background-color: var(--green-grey-shading);
+  border-radius: 8px;
 }

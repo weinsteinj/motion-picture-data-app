@@ -3,7 +3,7 @@
     <div id="main-bar">
       <div></div>
       <h1>{{headerText}}</h1>
-      <div> <router-link to="/add" class="btn">Add +</router-link> </div>
+      <div> <router-link to="/add" class="btn"><em>Add </em> <i class="fa fa-plus"></i></router-link> </div>
     </div>
     
     <div id="table-div">
@@ -20,12 +20,12 @@
         <td>{{m.releaseYear}}</td>
         <td>
           <router-link v-bind:to="{name: 'edit', params: {id: m.id, name: m.name, description: m.description, releaseYear: m.releaseYear}}">
-            <button class="btn btn-edit"> Edit </button>
+            <button class="btn btn-edit"> <i class="fa fa-edit"></i> </button>
           </router-link>
           <router-link v-bind:to="{name: 'copy', params: {id: m.id, name: m.name, description: m.description, releaseYear: m.releaseYear}}">  
-          <button class="btn btn-copy"> Copy </button>
+          <button class="btn btn-copy"> <i class="fa fa-copy"></i> </button>
           </router-link>
-          <button class="btn btn-delete" v-on:click.prevent="confirmAndDelete(m.id)" type="delete">Delete</button>
+          <button class="btn btn-delete" v-on:click.prevent="confirmAndDelete(m.id)" type="delete"><button> <i class="fa fa-trash"></i> </button></button>
         </td>
       </tr>
      </table>
@@ -198,5 +198,9 @@ tr {
 }
 tr:nth-child(even) {
   background-color: rgba(0, 0, 0, 0.123);
+}
+.fa-trash-can {
+  background-color: lightcoral;
+  padding: 0px;
 }
 </style>
