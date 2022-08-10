@@ -51,17 +51,18 @@ export default {
       apiService.postNewMovie(movieBody)
        .then(response => {
          if (response.status === 200) {
-           alert("Movie record successfully saved!")
+           alert("Movie record successfully saved!");
+           this.resetMovieForm;
+           let movieArray;
+           apiService.getAllMovies()
+           .then(response => {
+            movieArray = response.data
+            this.$store.commit('ADD__ALL_MOVIES', movieArray)
+            this.$router.push({name:'home'});
+        });
          }
        });
-      this.resetMovieForm;
-      let movieArray;
-      apiService.getAllMovies()
-        .then(response => {
-          movieArray = response.data
-          this.$store.commit('ADD__ALL_MOVIES', movieArray)
-          this.$router.push({name:'home'});
-        });
+      
     },
     resetMovieForm () {
       this.copiedMovie = {};

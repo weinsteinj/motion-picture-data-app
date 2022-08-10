@@ -90,16 +90,16 @@ export default {
       .then(response => {
          if (response.status === 200) {
            this.$router.go(0);
-           alert("Movie record successfully deleted!")
-         }
-       });
-      apiService.getAllMovies()
-        .then(response => {
-          if (response.status === 200) {
-          this.movieArray = response.data;
-          this.$store.commit('ADD__ALL_MOVIES', this.movieArray);
+           alert("Movie record successfully deleted!");
+           apiService.getAllMovies()
+            .then(response => {
+            if (response.status === 200) {
+            this.movieArray = response.data;
+            this.$store.commit('ADD__ALL_MOVIES', this.movieArray);
           }
         });
+         }
+       });
       }
     },
     // sort methods for each v-on:click at column heads, with toggle via boolean ascendingSort asc/desc

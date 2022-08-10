@@ -51,19 +51,18 @@ export default {
     updateMovie () {
       const movieBody = {id: this.updatedMovie.id, name: this.updatedMovie.name, description: this.updatedMovie.description, 
         releaseYear: Number.parseInt(this.updatedMovie.releaseYear)};
-      apiService.updateMovie(this.updatedMovie.id, movieBody);
-      this.resetMovieForm;
-      let movieArray;
-      // api call returns promise; if status is OKAY, data received is used to mutate datastore before hiding form;
-      apiService.getAllMovies()
-        .then(response => {
+      apiService.updateMovie(this.updatedMovie.id, movieBody)
+      .then(response => {
          if (response.status === 200) {
            alert("Movie record successfully edited!")
+           this.resetMovieForm;
+           let movieArray;
           movieArray = response.data;
           this.$store.commit('ADD__ALL_MOVIES', movieArray)
           this.$router.push({name:'home'});
           }
         });
+
     },
     resetMovieForm () {
       this.updatedMovie = {};
