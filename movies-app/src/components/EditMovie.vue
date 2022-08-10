@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>{{headerText}}</h1>
-    <form v-on:submit.prevent="updateMovie">
+    <form class="form-movie" v-on:submit.prevent="updateMovie">
       <label  for="name">Name:</label><br>
       <input id="movie-name" type="text" placeholder="Name" v-model="updatedMovie.name" 
       value="Old Title" required maxlength="50" minlength="1" >
@@ -20,9 +20,9 @@
       <br>
       <div id="action-button-area">
         <div></div>
-        <div><button type="submit">Save</button>
-        <button v-on:click.prevent="cancelEdit" type="cancel">Cancel</button>
-        <button v-on:click.prevent="confirmAndDelete" type="delete">Delete</button>
+        <div><button class="btn-save" type="submit">Save</button>
+        <button class="btn-cancel" v-on:click.prevent="cancelEdit" type="cancel">Cancel</button>
+        <button class="btn-delete" v-on:click.prevent="confirmAndDelete" type="delete">Delete</button>
         </div>
         <div></div>
       </div>
@@ -138,6 +138,14 @@ input:invalid {
 input:valid {
     border: 2px solid black;
 }
+/* form {
+    max-width: 50%;
+    margin: auto;
+    border: 10px solid rgba(15, 134, 11, 0.48);
+    border-radius: 8px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  } */
 
 
 

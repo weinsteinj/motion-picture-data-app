@@ -1,0 +1,60 @@
+:root {
+    --light-background-green: #F6FFF8;
+    --bold-green-border: #6B9080;
+    --green-grey-shading: #CCE3DE;
+    --grey-shading: #EAF4F4;
+    --moss-green-light: #A4C3B2;
+    --main-background: #F6FFF8
+   /* old background -- ivory */
+
+}
+
+.form-movie {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 80%;
+    max-width: 50%;
+    margin: auto;
+    border: 5px solid var(--bold-green-border);
+    border-radius: 8px;
+    padding: 20px 150px 20px 150px;
+    box-shadow: 15px 10px 0px var(--moss-green-light);
+    
+}
+
+
+.btn {
+    background-color: lightgreen;
+    color: light green;
+    border-color: midnightblue;
+    border-radius: 8px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.18);
+    font-size: 1.25em;
+}
+
+.btn-delete {
+  background-color: lightcoral;
+}
+
+.btn-copy, .btn-save {
+  background-color: skyblue;
+}
+
+.btn-edit {
+  background-color: greenyellow;
+}
+
+.btn-cancel {
+  background-color: var(--green-grey-shading);
+}
+
+
+
+/* form {
+    max-width: 50%;
+    margin: auto;
+    border: 10px solid rgba(15, 134, 11, 0.48);
+    border-radius: 8px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  } */

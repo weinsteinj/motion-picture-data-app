@@ -33,7 +33,7 @@
 }
 
 #app, nav, div, h1  {
-  background-color: ivory;
+  background-color: var(--main-background);
 }
 
 h1 {

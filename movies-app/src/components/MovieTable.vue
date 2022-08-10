@@ -119,7 +119,7 @@ export default {
 }
 
 body {
-  background-color: ivory;
+  background-color: var(--main-background);
 }
 
 h1 {
@@ -188,6 +188,7 @@ tr {
 tr:nth-child(even) {
   background-color: rgba(0, 0, 0, 0.123);
 }
+
 
 /* td {
     margin-left: 10 px;

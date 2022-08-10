@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>{{headerText}}</h1>
-    <form v-on:submit.prevent="copyMovie">
+    <form class="form-movie" v-on:submit.prevent="copyMovie">
       <label  for="name">Name:</label><br>
       <input id="movie-name" type="text" placeholder="Name" v-model="copiedMovie.name" 
       value="Old Title" required maxlength="50" minlength="1">
@@ -18,8 +18,8 @@
       <br>
       <div id="action-button-area">
         <div></div>
-        <div><button type="submit">Save</button>
-        <button v-on:click.prevent="cancelEdit" type="cancel">Cancel</button>
+        <div><button class="btn-save" type="submit">Save</button>
+        <button class="btn-cancel" v-on:click.prevent="cancelEdit" type="cancel">Cancel</button>
         <!-- <button v-on:click.prevent="confirmAndDelete" type="delete">Delete</button> -->
         </div>
         <div></div>
