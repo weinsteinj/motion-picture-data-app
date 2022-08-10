@@ -9,9 +9,9 @@
     <div id="table-div">
      <table>
       <tr>
-        <th>{{nameColHead}}</th>
-        <th>{{descriptionColHead}}</th>
-        <th>{{yearColHead}}</th>
+        <th @click="sortMoviesByName">{{nameColHead}}</th>
+        <th @click="sortMoviesByDescription">{{descriptionColHead}}</th>
+        <th @click="sortMoviesByYear">{{yearColHead}}</th>
         <th>{{actionsColHead}}</th>
       </tr>
       <tr v-for="m in $store.state.movies" v-bind:key="m.id">
@@ -57,7 +57,15 @@ export default {
       yearColHead: 'Release Year',
       actionsColHead: 'Actions',
       movieInfoToCopy: '',
+      sortedArray: this.movieArray,
+      ascendingSort: true,
     }
+  },
+  computed: {
+    moviesSortedByName() {
+      return this.sortMoviesByName(this.movieArray);
+    }
+
   },
   created () {
     apiService.getAllMovies()
@@ -98,9 +106,35 @@ export default {
         });
       }
     },
-    
-  },
-    
+    sortMoviesByName () {
+      if (this.ascendingSort === true) {
+        this.movieArray.sort((a,b) => a.name.localeCompare(b.name));
+        this.ascendingSort = false;
+        } 
+      else {
+        this.movieArray.sort((a,b) => b.name.localeCompare(a.name));
+        this.ascendingSort = true;
+        }
+      },
+    sortMoviesByDescription () {
+      if (this.ascendingSort === true)  {
+      this.movieArray.sort((a,b) => a.description.localeCompare(b.description));
+      this.ascendingSort = false;
+      } else {
+        this.movieArray.sort((a,b) => b.description.localeCompare(a.description));
+        this.ascendingSort = true;
+      }
+    },
+    sortMoviesByYear () {
+      if (this.ascendingSort === true) {
+      this.movieArray.sort((a,b) => a.releaseYear-b.releaseYear);
+      this.ascendingSort = false;
+      } else {
+      this.movieArray.sort((a,b) => b.releaseYear-a.releaseYear);
+      this.ascendingSort = true;
+      }
+    },
+  }
 }
 
 </script>
