@@ -3,9 +3,12 @@
     <div id="main-bar">
       <div></div>
       <h1>{{headerText}}</h1>
-      <div> <button class="btn" @click="loadAddMovie"><em>Add </em> <i class="fa fa-plus"></i></button> </div>
+      <div> <button class="btn" @click="showAddForm"><em>Add </em> <i class="fa fa-plus"></i></button> </div>
     </div>
-    <form-modal v-show="showModal" @closeModal="showModalToggle"></form-modal>
+    <add-modal v-show="inAddMode"></add-modal>
+    <copy-modal v-show="inCopyMode"></copy-modal>
+    <edit-modal v-show="inEditMode" v-bind:activeMovie="activeMovie"></edit-modal>
+    <!-- <form-modal v-show="showModal" @closeModal="showModalToggle"></form-modal> -->
     <div id="table-div">
      <table>
       <tr>
@@ -19,12 +22,12 @@
         <td>{{m.description}}</td>
         <td>{{m.releaseYear}}</td>
         <td>
-          
-          <button class="btn btn-edit" @click="activateEditMode(m.id)"> <i class="fa fa-edit"></i> </button>
+        
+          <button class="btn btn-edit" @click.prevent="showEditForm(m.id)"> <i class="fa fa-edit"></i> </button>
          
-          <button class="btn btn-copy" @click="setActiveMovie(m.id)"> <i class="fa fa-copy"></i> </button>
+          <button class="btn btn-copy" @click="showCopyForm(m.id)"> <i class="fa fa-copy"></i> </button>
          
-          <button class="btn btn-delete" @click.prevent="confirmAndDelete(m.id)" type="delete"><button> <i class="fa fa-trash"></i> </button></button>
+          <button class="btn btn-delete" @click="confirmAndDelete(m.id)" type="delete"><button> <i class="fa fa-trash"></i> </button></button>
         </td>
       </tr>
      </table>
@@ -37,13 +40,19 @@
 <script>
 import FooterCog from '@/components/FooterCog.vue'
 import apiService from '@/service/apiService.js'
-import FormModal from '@/components/FormModal.vue'
+// import FormModal from '@/components/FormModal.vue'
+import AddModal from '@/components/AddModal.vue'
+import EditModal from '@/components/EditModal.vue'
+import CopyModal from '@/components/CopyModal.vue'
 
 export default {
   name: 'movie-table-modal',
   components: {
     FooterCog,
-    FormModal,
+    // FormModal,
+    AddModal,
+    EditModal,
+    CopyModal,
   },
   data () {
     return {
@@ -62,6 +71,10 @@ export default {
       ascendingSortYear: true,
       showModal: false,
       editMode: false,
+
+      inAddMode: false,
+      inCopyMode: false,
+      inEditMode: false,
     }
   },
   computed: {
@@ -78,16 +91,6 @@ export default {
   },
 
   methods: {
-    // copyMovie (id) {
-    //   let movieToCopy;
-    //   apiService.getMovie(id)
-    //    .then(response => {
-    //      if (response.status === 200) { 
-    //         movieToCopy = response.data;
-    //         this.movieToCopy = movieToCopy;
-    //         } 
-    //    }); 
-    // },
     activateEditMode(id) {
         if(this.$store.state.inEditMode === false) {
         this.$store.commit('TOGGLE_EDIT_MODE')
@@ -126,13 +129,29 @@ export default {
         this.showModalToggle();
     },
     setActiveMovie (id) {
+        // let active = this.$store.state.movieArray.find((movie) => movie.id === id);
+        // this.activeMovie = active;
         this.activeMovie = this.movieArray.find((movie) => movie.id === id);
         this.$store.commit('SET_ACTIVE_MOVIE', this.activeMovie);
-        this.showModalToggle();
+        // this.showModalToggle();
     },
-    showModalToggle () {
-        this.showModal = !this.showModal;
+    showAddForm() {
+        this.activeMovie = {};
+        this.$store.commit('SET_ACTIVE_MOVIE', this.activeMovie);
+        this.inAddMode = true;
     },
+    showCopyForm(id){
+        this.setActiveMovie(id)
+        this.inCopyMode = true;
+    },
+    showEditForm(id){
+      this.setActiveMovie(id);
+      this.inEditMode = true;
+    },
+
+    // showModalToggle () {
+    //     this.showModal = !this.showModal;
+    // },
     // sort methods for each v-on:click at column heads, with toggle via boolean ascendingSort asc/desc
     sortMoviesByName () {
       if (this.ascendingSortName === true) {

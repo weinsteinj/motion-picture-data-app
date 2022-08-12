@@ -48,8 +48,8 @@ export default {
   },
   methods: {
       // method to differentiate save/submit operation between Add adn Edit/Copy
-    executeFormAction () {
-      this.$store.state.inCreateMode ? this.postMovie() : this.updatedMovie();  
+    executeFormAction () {this.postMovie()
+      
     }, 
       // if form data is validated, sends POST request to server (with back-up validation) to create a new movie record
     postMovie () {

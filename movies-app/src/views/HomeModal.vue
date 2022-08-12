@@ -7,7 +7,7 @@
 import MovieTableModal from '@/components/MovieTableModal.vue'
 
 export default {
-  name: 'test-modal-view',
+  name: 'home',
     components: {
         MovieTableModal,
     },

@@ -34,7 +34,7 @@ export default {
   name: 'copy-movie',
   data () {
     return {
-      headerText: 'Please select Save to Copy the Movie Data Below',
+      headerText: 'Please select Save to Copy the Movie Record Below',
       copiedMovie: {
         id: this.$route.params.id,
         name: this.$route.params.name,

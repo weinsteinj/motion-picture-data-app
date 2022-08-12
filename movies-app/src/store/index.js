@@ -7,6 +7,8 @@ export default new Vuex.Store({
   state: {
     movies: [],
     activeMovie: {},
+    inAddMode: false,
+    inCopyMode: false,
     inEditMode: false,
   },
   mutations: {
@@ -16,11 +18,14 @@ export default new Vuex.Store({
     SET_ACTIVE_MOVIE (state, activeMovie) {
       this.state.activeMovie = activeMovie;
     },
+    TOGGLE_ADD_MODE () {
+      this.state.inAddMode = !this.state.inAddMode;
+    },
+    TOGGLE_COPY_MODE () {
+      this.state.inCopyMode = !this.state.inCopyMode;
+    },
     TOGGLE_EDIT_MODE () {
       this.state.inEditMode = !this.state.inEditMode;
-    },
-    TOGGLE_CREATE_MODE () {
-      this.state.inCreateMode = !this.state.inCreateMode;
     },
   },
   actions: {
