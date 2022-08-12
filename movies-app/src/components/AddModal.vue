@@ -21,7 +21,7 @@
             <div id="action-button-area">
              <div></div>
         <div><button class="btn-save" type="submit">Save</button>
-        <button class="btn-cancel" @click.prevent="$emit('closeModal')" @click="resetEditMode" type="cancel">Cancel</button>
+        <button class="btn-cancel" @click.prevent="cancelEdit" @click="resetEditMode" type="cancel">Cancel</button>
         <button class="btn-delete" v-if="$store.state.inEditMode" @click.prevent="confirmAndDelete" @click="resetEditMode" type="delete">Delete</button>
         </div>
         <div></div>
@@ -80,9 +80,6 @@ export default {
       this.$router.go(0);
     },
   },
-  // props: {
-  //       activeMovie: {},
-  //   }, 
 }
 
 </script>
@@ -98,14 +95,6 @@ export default {
     justify-content: center;
     background-color: #B5E48Cda;
 }
-/* .modal {
-    height: 70vh;
-    width: 70vw;
-    margin: 10% 10% 10% 10%;
-    padding: 10px 10px 10px 10px;
-    background-color: var(--main-background) ;
-} */
-
 h3 {
   margin: 40px 0 0;
 }

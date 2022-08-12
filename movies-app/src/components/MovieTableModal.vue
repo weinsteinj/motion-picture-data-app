@@ -40,7 +40,6 @@
 <script>
 import FooterCog from '@/components/FooterCog.vue'
 import apiService from '@/service/apiService.js'
-// import FormModal from '@/components/FormModal.vue'
 import AddModal from '@/components/AddModal.vue'
 import EditModal from '@/components/EditModal.vue'
 import CopyModal from '@/components/CopyModal.vue'
@@ -49,7 +48,6 @@ export default {
   name: 'movie-table-modal',
   components: {
     FooterCog,
-    // FormModal,
     AddModal,
     EditModal,
     CopyModal,
@@ -64,14 +62,10 @@ export default {
       descriptionColHead: 'Description',
       yearColHead: 'Release Year',
       actionsColHead: 'Actions',
-      movieInfoToCopy: '',
-      sortedArray: this.movieArray,
       ascendingSortName: true,
       ascendingSortDescription: true,
       ascendingSortYear: true,
-      showModal: false,
       editMode: false,
-
       inAddMode: false,
       inCopyMode: false,
       inEditMode: false,
@@ -129,11 +123,8 @@ export default {
         this.showModalToggle();
     },
     setActiveMovie (id) {
-        // let active = this.$store.state.movieArray.find((movie) => movie.id === id);
-        // this.activeMovie = active;
         this.activeMovie = this.movieArray.find((movie) => movie.id === id);
         this.$store.commit('SET_ACTIVE_MOVIE', this.activeMovie);
-        // this.showModalToggle();
     },
     showAddForm() {
         this.activeMovie = {};
@@ -148,10 +139,6 @@ export default {
       this.setActiveMovie(id);
       this.inEditMode = true;
     },
-
-    // showModalToggle () {
-    //     this.showModal = !this.showModal;
-    // },
     // sort methods for each v-on:click at column heads, with toggle via boolean ascendingSort asc/desc
     sortMoviesByName () {
       if (this.ascendingSortName === true) {

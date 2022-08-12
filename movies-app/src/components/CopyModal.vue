@@ -72,9 +72,6 @@ export default {
       this.$router.go(0);
     },
   },
-  props: {
-        activeMovie: {},
-    }, 
 }
 
 </script>
@@ -90,14 +87,6 @@ export default {
     justify-content: center;
     background-color: #B5E48Cda;
 }
-/* .modal {
-    height: 70vh;
-    width: 70vw;
-    margin: 10% 10% 10% 10%;
-    padding: 10px 10px 10px 10px;
-    background-color: var(--main-background) ;
-} */
-
 h3 {
   margin: 40px 0 0;
 }
