@@ -51,6 +51,7 @@ export default {
       this.isInvalidYear = false;
       const movieBody = {name: this.newMovie.name, description: this.newMovie.description, releaseYear: Number.parseInt(this.newMovie.releaseYear)};
       apiService.postNewMovie(movieBody)
+      // api call returns promise; if status is OKAY, data received is used to mutate datastore before hiding form;
        .then(response => {
          if (response.status === 200) {
            alert("Movie record successfully saved!");
@@ -61,13 +62,14 @@ export default {
              movieArray = response.data;
              this.$store.commit('ADD__ALL_MOVIES', movieArray);
              this.$router.push({name:'home'});
-          }
-        });
-         }
+             this.resetMovieForm;
+            }
+          })
+        }
+       })
+       .catch(() => {
+         alert("Sorry. An error has occurred.")
        });
-      this.resetMovieForm;
-      // api call returns promise; if status is OKAY, data received is used to mutate datastore before hiding form;
-      
     },
     resetMovieForm () {
       this.newMovie = {};

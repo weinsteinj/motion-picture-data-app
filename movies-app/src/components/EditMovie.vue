@@ -61,8 +61,10 @@ export default {
           this.$store.commit('ADD__ALL_MOVIES', movieArray)
           this.$router.push({name:'home'});
           }
-        });
-
+        })
+      .catch(() => {
+         alert("Sorry. An error has occurred.")
+       });
     },
     resetMovieForm () {
       this.updatedMovie = {};
@@ -76,6 +78,9 @@ export default {
          if (response.status === 200) {
            alert("Movie record successfully deleted!")
          }
+       })
+       .catch(() => {
+         alert("Sorry. An error has occurred.")
        });
       this.resetMovieForm;
       let movieArray;
@@ -86,7 +91,10 @@ export default {
           this.$store.commit('ADD__ALL_MOVIES', movieArray);
           this.$router.push({name:'home'});
           }
-        });
+        })
+        .catch(() => {
+         alert("Sorry. An error has occurred.")
+       });
       }
     },
     cancelEdit () {

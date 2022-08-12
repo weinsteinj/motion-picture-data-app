@@ -61,8 +61,10 @@ export default {
             this.$router.push({name:'home'});
         });
          }
+       })
+       .catch(() => {
+         alert("Sorry. An error has occurred.")
        });
-      
     },
     resetMovieForm () {
       this.copiedMovie = {};

@@ -5,6 +5,7 @@ import Add from '../views/Add.vue'
 import Table from '@/views/Table.vue'
 import Edit from '../views/Edit.vue'
 import Copy from '@/views/Copy.vue'
+import TestModal from '@/views/TestModal.vue'
 
 Vue.use(VueRouter)
 
@@ -34,8 +35,12 @@ const routes = [
     name: 'copy',
     component: Copy
   },
+  {
+    path: '/test',
+    name: 'test-modal-view',
+    component: TestModal
+  },
 ]
-
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,

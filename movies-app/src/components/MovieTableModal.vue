@@ -3,9 +3,9 @@
     <div id="main-bar">
       <div></div>
       <h1>{{headerText}}</h1>
-      <div> <router-link to="/add" class="btn"><em>Add </em> <i class="fa fa-plus"></i></router-link> </div>
+      <div> <button class="btn" @click="loadAddMovie"><em>Add </em> <i class="fa fa-plus"></i></button> </div>
     </div>
-    
+    <form-modal v-show="showModal" @closeModal="showModalToggle"></form-modal>
     <div id="table-div">
      <table>
       <tr>
@@ -14,18 +14,17 @@
         <th @click="sortMoviesByYear">{{yearColHead}}</th>
         <th>{{actionsColHead}}</th>
       </tr>
-      <tr v-for="m in $store.state.movies" v-bind:key="m.id">
+      <tr v-for="m in $store.state.movies" v-bind:key="m.id" v-bind:activeMovieId="m.id">
         <td>{{m.name}}</td>
         <td>{{m.description}}</td>
         <td>{{m.releaseYear}}</td>
         <td>
-          <router-link v-bind:to="{name: 'edit', params: {id: m.id, name: m.name, description: m.description, releaseYear: m.releaseYear}}">
-            <button class="btn btn-edit"> <i class="fa fa-edit"></i> </button>
-          </router-link>
-          <router-link v-bind:to="{name: 'copy', params: {id: m.id, name: m.name, description: m.description, releaseYear: m.releaseYear}}">  
-          <button class="btn btn-copy"> <i class="fa fa-copy"></i> </button>
-          </router-link>
-          <button class="btn btn-delete" v-on:click.prevent="confirmAndDelete(m.id)" type="delete"><button> <i class="fa fa-trash"></i> </button></button>
+          
+          <button class="btn btn-edit" @click="activateEditMode(m.id)"> <i class="fa fa-edit"></i> </button>
+         
+          <button class="btn btn-copy" @click="setActiveMovie(m.id)"> <i class="fa fa-copy"></i> </button>
+         
+          <button class="btn btn-delete" @click.prevent="confirmAndDelete(m.id)" type="delete"><button> <i class="fa fa-trash"></i> </button></button>
         </td>
       </tr>
      </table>
@@ -38,14 +37,17 @@
 <script>
 import FooterCog from '@/components/FooterCog.vue'
 import apiService from '@/service/apiService.js'
+import FormModal from '@/components/FormModal.vue'
 
 export default {
-  name: 'movie-table',
+  name: 'movie-table-modal',
   components: {
     FooterCog,
+    FormModal,
   },
   data () {
     return {
+      activeMovie: null,  
       movie: null,
       movieArray: [],
       headerText: ' Welcome to Movie-Vue! ',
@@ -55,7 +57,11 @@ export default {
       actionsColHead: 'Actions',
       movieInfoToCopy: '',
       sortedArray: this.movieArray,
-      ascendingSort: true,
+      ascendingSortName: true,
+      ascendingSortDescription: true,
+      ascendingSortYear: true,
+      showModal: false,
+      editMode: false,
     }
   },
   computed: {
@@ -72,15 +78,21 @@ export default {
   },
 
   methods: {
-    copyMovie (id) {
-      let movieToCopy;
-      apiService.getMovie(id)
-       .then(response => {
-         if (response.status === 200) { 
-            movieToCopy = response.data;
-            this.movieToCopy = movieToCopy;
-            } 
-       }); 
+    // copyMovie (id) {
+    //   let movieToCopy;
+    //   apiService.getMovie(id)
+    //    .then(response => {
+    //      if (response.status === 200) { 
+    //         movieToCopy = response.data;
+    //         this.movieToCopy = movieToCopy;
+    //         } 
+    //    }); 
+    // },
+    activateEditMode(id) {
+        if(this.$store.state.inEditMode === false) {
+        this.$store.commit('TOGGLE_EDIT_MODE')
+        }
+        this.setActiveMovie(id);
     },
     confirmAndDelete (id) {
       if (
@@ -105,36 +117,52 @@ export default {
        });
       }
     },
+    loadAddMovie () {
+        this.activeMovie = {};
+        this.$store.commit('SET_ACTIVE_MOVIE', this.activeMovie);
+        if(this.$store.state.inCreateMode === false) {
+        this.$store.commit('TOGGLE_CREATE_MODE')
+        }
+        this.showModalToggle();
+    },
+    setActiveMovie (id) {
+        this.activeMovie = this.movieArray.find((movie) => movie.id === id);
+        this.$store.commit('SET_ACTIVE_MOVIE', this.activeMovie);
+        this.showModalToggle();
+    },
+    showModalToggle () {
+        this.showModal = !this.showModal;
+    },
     // sort methods for each v-on:click at column heads, with toggle via boolean ascendingSort asc/desc
     sortMoviesByName () {
-      if (this.ascendingSort === true) {
+      if (this.ascendingSortName === true) {
         this.movieArray.sort((a,b) => a.name.localeCompare(b.name));
-        this.ascendingSort = false;
+        this.ascendingSortName = false;
         } 
       else {
         this.movieArray.sort((a,b) => b.name.localeCompare(a.name));
-        this.ascendingSort = true;
+        this.ascendingSortName = true;
         }
       },
     sortMoviesByDescription () {
-      if (this.ascendingSort === true)  {
+      if (this.ascendingSortDescription === true)  {
       this.movieArray.sort((a,b) => a.description.localeCompare(b.description));
-      this.ascendingSort = false;
+      this.ascendingSortDescription = false;
       } else {
         this.movieArray.sort((a,b) => b.description.localeCompare(a.description));
-        this.ascendingSort = true;
+        this.ascendingSortDescription = true;
       }
     },
     sortMoviesByYear () {
-      if (this.ascendingSort === true) {
+      if (this.ascendingSortYear === true) {
       this.movieArray.sort((a,b) => a.releaseYear-b.releaseYear);
-      this.ascendingSort = false;
+      this.ascendingSortYear = false;
       } else {
       this.movieArray.sort((a,b) => b.releaseYear-a.releaseYear);
-      this.ascendingSort = true;
+      this.ascendingSortYear = true;
       }
     },
-  }
+  },
 }
 </script>
 
