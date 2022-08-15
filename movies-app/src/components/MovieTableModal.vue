@@ -8,7 +8,6 @@
     <add-modal v-show="inAddMode"></add-modal>
     <copy-modal v-show="inCopyMode"></copy-modal>
     <edit-modal v-show="inEditMode" v-bind:activeMovie="activeMovie"></edit-modal>
-    <!-- <form-modal v-show="showModal" @closeModal="showModalToggle"></form-modal> -->
     <div id="table-div">
      <table>
       <tr>
